@@ -63,7 +63,8 @@ async function processImages() {
     processedImages = result
     return result
   } catch (error) {
-    throw new Error('Some Error')
+    console.log(error)
+    throw new Error(error)
   }
 }
 
