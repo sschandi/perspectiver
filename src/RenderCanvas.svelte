@@ -4,6 +4,9 @@ import ChooseDesign from './ChooseDesign.svelte'
 
 export let images = []
 
+let processedImagesPromise = processImages()
+let processedImages = []
+
 let canvas
 let canvasWidth = 1920
 let canvasHeight = 1080
@@ -16,6 +19,11 @@ let dragStart = null
 let scaleFactor = 1.1
 
 $: if (images.length > 0) {
+  processedImagesPromise = processImages()
+  redraw()
+}
+
+$: if (processedImages.length > 0) {
   redraw()
 }
 
@@ -30,7 +38,6 @@ function setupCanvas() {
   ctx = canvas.getContext('2d')
 
   trackTransforms(ctx)
-  redraw()
   
   ctx.shadowColor = '#222831'
   ctx.shadowBlur = 30
@@ -39,19 +46,45 @@ function setupCanvas() {
   // ctx.transform(1, 0, .8, 1, 0, 0)
   // ctx.transform(0.87, -0.48, 0.87, 0.48, 0, 0)
   ctx.transform(...transformMatrix)
+
+  redraw()
 }
 
-function drawImage({ src, width, height, left, top }) {
-  const image = new Image()
-  image.crossOrigin = 'Anonymous'
-  image.src = src
-  image.onload = () => {
-    ctx.drawImage(image, left, top, width, height)
+async function processImages() {
+  const imagesPromises = images.map( async (image) => {
+    const processedImage = await getImageElement(image.src)
+    return {
+      ...image,
+      image: processedImage
+    }
+  })
+  try {
+    const result = await Promise.all(imagesPromises)
+    processedImages = result
+    return result
+  } catch (error) {
+    throw new Error('Some Error')
   }
 }
 
+function getImageElement(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => {
+      resolve(image)
+    }
+    image.onerror = reject
+    image.crossOrigin = 'Anonymous'
+    image.src = src
+  })
+}
+
+function drawImage({ image, width, height, left, top }) {
+  ctx.drawImage(image, left, top, width, height)
+}
+
 function drawImages() {
-  images.forEach((image) => {
+  processedImages.forEach((image) => {
     drawImage(image)
   })
 }
@@ -201,6 +234,10 @@ function trackTransforms(ctx) {
 
 <ChooseDesign/>
 <h1>Render Canvas</h1>
+
+{#await processedImagesPromise}
+  <p>...waiting</p>
+{:then res}
 <input
   type="range"
   bind:value={canvasWidth}
@@ -216,7 +253,10 @@ function trackTransforms(ctx) {
   min="1"
   max="1080"
 />
-  {canvasHeight}px Height
+{canvasHeight}px Height
+{:catch error}
+  <p>Error {error}</p>
+{/await}
 <canvas
   id="render-canvas"
   bind:this="{canvas}"
