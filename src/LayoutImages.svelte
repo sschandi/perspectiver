@@ -2,6 +2,7 @@
 import { onMount, createEventDispatcher } from "svelte";
 import { fabric } from "fabric";
 import { viewport } from './state/viewport.js'
+import ImportImages from './ImportImages.svelte'
 
 const dispatch = createEventDispatcher()
 
@@ -163,10 +164,15 @@ function setCanvasSize(width) {
 
 function addImageFromURL(url) {
   // toDataURL(url)
+  // console.log(url)
   fabric.Image.fromURL(url, (img) => {
     let canvasImg = img.set({ left: 0, top: 0 ,width: img.width, height: img.height, hasRotatingPoint: false })
     canvas.add(canvasImg)
   });
+}
+
+function importImage(event) {
+  addImageFromURL(event.detail)
 }
 
 // function toDataURL(src) {
@@ -253,6 +259,7 @@ function deleteSelectedImage() {
 </style>
 
 <h1>Layout Images</h1>
+<ImportImages on:image="{importImage}"/>
 <div id="layout-container">
   <canvas id="layout" bind:this="{canvasElement}">
   </canvas>
