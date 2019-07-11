@@ -258,6 +258,13 @@ function trackTransforms(ctx) {
 }
 </script>
 
+<style>
+canvas {
+  border: 1px solid black;
+  max-width: 100vw;
+}
+</style>
+
 <ChooseDesign on:design="{setupDesign}"/>
 <h1>Render Canvas</h1>
 
@@ -280,6 +287,27 @@ function trackTransforms(ctx) {
   max="1080"
 />
 {canvasHeight}px Height
+Shadow Blur
+<input
+  type=number bind:value={shadowBlur}
+  min="0"
+  on:input="{setupCanvas}"
+>
+Shadow Offset X
+<input
+  type=number bind:value={shadowOffsetX}
+  on:input="{setupCanvas}"
+>
+Shadow Offset Y
+<input
+  type=number bind:value={shadowOffsetY}
+  on:input="{setupCanvas}"
+>
+Shadow Color
+<input
+  type="color" bind:value="{shadowColor}"
+  on:input="{setupCanvas}"
+>
 {:catch error}
   <p>Error {error}</p>
 {/await}

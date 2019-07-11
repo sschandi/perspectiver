@@ -7,6 +7,7 @@ import ImportImages from './ImportImages.svelte'
 const dispatch = createEventDispatcher()
 
 const grid = 25
+const maxImageWidth = 200
 let canvasWidth = 1920
 let canvasHeight = 1080
 // Actual DOM Canvas
@@ -25,7 +26,7 @@ onMount(() => {
   canvas = new fabric.Canvas("layout", {
     selection: false
   });
-  setCanvasSize($viewport.width)
+  setCanvasSize($viewport.width, $viewport.height)
   addGrid()
 
   // addImageFromURL("http://fabricjs.com/assets/pug_small.jpg")
@@ -155,19 +156,18 @@ function renderCanvas() {
   dispatch('render', getImages())
 }
 
-function setCanvasSize(width) {
+function setCanvasSize(width, height) {
   if (!canvas) {
     return
   }
   canvas.setWidth(width - 20)
-  canvas.setHeight($viewport.height - 400)
+  canvas.setHeight(height - 20)
 }
 
 function addImageFromURL(url) {
-  // toDataURL(url)
-  // console.log(url)
   fabric.Image.fromURL(url, (img) => {
     let canvasImg = img.set({ left: 0, top: 0 ,width: img.width, height: img.height, hasRotatingPoint: false })
+    canvasImg.scaleToWidth(maxImageWidth, false)
     canvas.add(canvasImg)
   });
 }
