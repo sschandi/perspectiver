@@ -20,8 +20,9 @@ let scaleFactor = 1.1
 let shadowColor = '#222831'
 let shadowBlur = 30
 let shadowOffsetX = -5
-let shadowOFfsetY = 20
+let shadowOffsetY = 20
 let transformMatrix = [1, -0.5, 1, 0.5, 0, 0]
+let rotate = 0
 let imageSort = (images) => {
   images.sort((a, b) => {
     return (b.left - a.left) + (a.top - b.top)
@@ -49,15 +50,28 @@ function setupCanvas() {
 
   trackTransforms(ctx)
   
-  ctx.shadowColor = '#222831'
-  ctx.shadowBlur = 30
-  ctx.shadowOffsetX = -5
-  ctx.shadowOffsetY = 20
+  ctx.shadowColor = shadowColor
+  ctx.shadowBlur = shadowBlur
+  ctx.shadowOffsetX = shadowOffsetX
+  ctx.shadowOffsetY = shadowOffsetY
+  ctx.rotate(rotate)
   // ctx.transform(1, 0, .8, 1, 0, 0)
   // ctx.transform(0.87, -0.48, 0.87, 0.48, 0, 0)
   ctx.transform(...transformMatrix)
 
   redraw()
+}
+
+function setupDesign(event) {
+  const design = event.detail
+  shadowColor = design.shadowColor
+  shadowBlur = design.shadowBlur
+  shadowOffsetX = design.shadowOffsetX
+  shadowOffsetY = design.shadowOffsetY
+  rotate = design.rotate
+  transformMatrix = design.transformMatrix
+  imageSort = design.imageSort
+  setupCanvas()
 }
 
 async function processImages() {
@@ -244,7 +258,7 @@ function trackTransforms(ctx) {
 }
 </script>
 
-<ChooseDesign/>
+<ChooseDesign on:design="{setupDesign}"/>
 <h1>Render Canvas</h1>
 
 {#await processedImagesPromise}
