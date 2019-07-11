@@ -11,12 +11,22 @@ let canvas
 let canvasWidth = 1920
 let canvasHeight = 1080
 let ctx = null
-let transformMatrix = [1, -0.5, 1, 0.5, 0, 0]
 let lastX = 600/2
 let lastY = 600/2
 let dragged = false
 let dragStart = null
 let scaleFactor = 1.1
+
+let shadowColor = '#222831'
+let shadowBlur = 30
+let shadowOffsetX = -5
+let shadowOFfsetY = 20
+let transformMatrix = [1, -0.5, 1, 0.5, 0, 0]
+let imageSort = (images) => {
+  images.sort((a, b) => {
+    return (b.left - a.left) + (a.top - b.top)
+  })
+}
 
 $: if (images.length > 0) {
   processedImagesPromise = processImages()
@@ -85,6 +95,7 @@ function drawImage({ image, width, height, left, top }) {
 }
 
 function drawImages() {
+  imageSort(processedImages)
   processedImages.forEach((image) => {
     drawImage(image)
   })

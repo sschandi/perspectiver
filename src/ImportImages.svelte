@@ -39,7 +39,26 @@ function upload(data) {
 </script>
 
 <style>
+.image-input-upload {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.image-dropper {
+  height: 100px;
+  cursor: pointer;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.image-dropper:hover {
+  background-color: azure;
+}
 </style>
+
 <input
   bind:this="{uploader}"
   type="file"
@@ -50,20 +69,15 @@ function upload(data) {
 />
 
 <div
-  class="image-dropper grey lighten-2 {imageUploadActive ? 'secondary' : ''}"
-  row
-  mb-3
-  mx-0
-  align-center
-  justify-center
+  class="image-dropper {imageUploadActive ? 'secondary' : ''}"
   on:dragover|preventDefault="{imageUploadActive = true}"
   on:dragenter|preventDefault=""
   on:dragleave|preventDefault="{imageUploadActive = false}"
   on:drop|preventDefault="{dropImage}"
   on:click|preventDefault="{clickImage}"
 >
-  <div class="text-xs-center">
-    <div class="headline">Drop Image Here</div>
-    <div class="body">click to open dialog</div>
+  <div>
+    <p>Drop Image Here</p>
+    <p>click to open dialog</p>
   </div>
 </div>

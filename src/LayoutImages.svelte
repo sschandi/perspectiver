@@ -37,6 +37,7 @@ onMount(() => {
   // );
   // addImageFromURL('http://phrogz.net/tmp/gkhead.jpg')
   addImageFromURL('https://i.imgur.com/31JMbcr.jpg')
+  addImageFromURL('https://i.imgur.com/31JMbcr.jpg')
 
   // Active objects show delete button
   canvas.on('object:selected', options => {
