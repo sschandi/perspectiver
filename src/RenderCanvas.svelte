@@ -1,15 +1,18 @@
 <script>
 import { onMount } from 'svelte'
 import ChooseDesign from './ChooseDesign.svelte'
+import { createEventDispatcher } from 'svelte'
 
 export let images = []
+
+const dispatch = createEventDispatcher()
 
 let processedImagesPromise = processImages()
 let processedImages = []
 
 let canvas
-let canvasWidth = 1920
-let canvasHeight = 1080
+let canvasWidth = 1280
+let canvasHeight = 720
 let ctx = null
 let lastX = 600/2
 let lastY = 600/2
@@ -39,14 +42,13 @@ $: if (processedImages.length > 0) {
 }
 
 onMount(() => {
+  ctx = canvas.getContext('2d')
   setupCanvas()
 })
 
 function setupCanvas() {
   canvas.width = canvasWidth
   canvas.height = canvasHeight
-
-  ctx = canvas.getContext('2d')
 
   trackTransforms(ctx)
   
@@ -65,6 +67,7 @@ function setupCanvas() {
 function setupDesign(event) {
   const design = event.detail
   shadowColor = design.shadowColor
+  console.log(shadowColor)
   shadowBlur = design.shadowBlur
   shadowOffsetX = design.shadowOffsetX
   shadowOffsetY = design.shadowOffsetY
@@ -264,7 +267,6 @@ canvas {
   max-width: 100vw;
 }
 </style>
-
 <ChooseDesign on:design="{setupDesign}"/>
 <h1>Render Canvas</h1>
 
@@ -272,19 +274,17 @@ canvas {
   <p>...waiting</p>
 {:then res}
 <input
-  type="range"
+  type="number"
   bind:value={canvasWidth}
   on:input="{setupCanvas}"
   min="1"
-  max="1920"
 />
 {canvasWidth}px Width
 <input
-  type="range"
+  type="number"
   bind:value={canvasHeight}
   on:input="{setupCanvas}"
   min="1"
-  max="1080"
 />
 {canvasHeight}px Height
 Shadow Blur
@@ -305,7 +305,7 @@ Shadow Offset Y
 >
 Shadow Color
 <input
-  type="color" bind:value="{shadowColor}"
+  type="color" bind:value={shadowColor}
   on:input="{setupCanvas}"
 >
 {:catch error}

@@ -20,7 +20,7 @@ const designs = [
   },
   {
     image: 'assets/square-placeholder.jpg',
-    shadowColor: 'red',
+    shadowColor: '#415145',
     shadowBlur: 10,
     shadowOffsetX: 0,
     shadowOffsetY: 0,

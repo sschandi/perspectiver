@@ -2,7 +2,10 @@
 import { onMount, createEventDispatcher } from "svelte";
 import { fabric } from "fabric";
 import { viewport } from './state/viewport.js'
+import { fade } from 'svelte/transition'
 import ImportImages from './ImportImages.svelte'
+
+export let showLayout = true
 
 const dispatch = createEventDispatcher()
 
@@ -16,8 +19,18 @@ let canvasElement
 let canvas = null
 let showGrid = true
 let showRemove = false
+// Grow and Shrink transitions
+let container
+let measuringWrapper
 
 $: setCanvasSize($viewport.width)
+$: if (container) {
+  if (showLayout) {
+      container.style.height = measuringWrapper.clientHeight + 'px'
+  } else {
+    container.style.height = 0
+  }
+}
 
 onMount(() => {
   // canvasElement.width = canvasWidth
@@ -250,6 +263,10 @@ function deleteSelectedImage() {
 
 <style>
 #layout-container {
+  transition: height 400ms ease-in-out;
+  overflow: hidden;
+}
+#layout-canvas-container {
   position: relative;
 }
 .remove {
@@ -259,16 +276,26 @@ function deleteSelectedImage() {
 }
 </style>
 
-<h1>Layout Images</h1>
-<ImportImages on:image="{importImage}">
-  <div id="layout-container">
-    <canvas id="layout" bind:this="{canvasElement}">
-    </canvas>
-    {#if showRemove}
-      <div class="remove">
-        <button on:click="{deleteSelectedImage}">Delete selected image</button>
+<div>
+  <h1>Layout Images</h1>
+  {#if showLayout}
+    <button on:click="{renderCanvas}">RenderCanvas</button>
+  {:else}
+    <button on:click="{() => dispatch('back', true)}">Back</button>
+  {/if}
+</div>
+<div id="layout-container" bind:this="{container}">
+  <div class="container-measure" bind:this="{measuringWrapper}">
+    <ImportImages on:image="{importImage}">
+      <div id="layout-canvas-container">
+        <canvas id="layout" bind:this="{canvasElement}">
+        </canvas>
+        {#if showRemove}
+          <div class="remove" transition:fade>
+            <button on:click="{deleteSelectedImage}">Delete selected image</button>
+          </div>
+        {/if}
       </div>
-    {/if}
+    </ImportImages>
   </div>
-</ImportImages>
-<button on:click="{renderCanvas}">RenderCanvas</button>
+</div>
