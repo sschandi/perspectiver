@@ -45,16 +45,7 @@ function upload(data) {
   width: 0;
   height: 0;
 }
-.image-dropper {
-  height: 100px;
-  cursor: pointer;
-  background-color: grey;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.image-dropper:hover {
+.active {
   background-color: azure;
 }
 </style>
@@ -67,17 +58,14 @@ function upload(data) {
   multiple="multiple"
   on:change="{inputImage}"
 />
-
+<p>Add Images by dragging to canvas below or</p>
+<button on:click="{clickImage}">Click Here</button>
 <div
-  class="image-dropper {imageUploadActive ? 'secondary' : ''}"
-  on:dragover|preventDefault="{imageUploadActive = true}"
+  class="image-dropper {imageUploadActive ? 'active' : ''}"
+  on:dragover|preventDefault="{() => imageUploadActive = true}"
   on:dragenter|preventDefault=""
-  on:dragleave|preventDefault="{imageUploadActive = false}"
+  on:dragleave|preventDefault="{() => imageUploadActive = false}"
   on:drop|preventDefault="{dropImage}"
-  on:click|preventDefault="{clickImage}"
 >
-  <div>
-    <p>Drop Image Here</p>
-    <p>click to open dialog</p>
-  </div>
+  <slot/>
 </div>

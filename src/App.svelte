@@ -14,9 +14,16 @@
 </script>
 
 <style>
-	h1 {
-		color: purple
-	}
+:global(:root) {
+	--primary: #aaa333;
+}
+:global(p) {
+	margin: 0;
+	color: var(--primary);
+}
+h1 {
+	color: var(--primary);
+}
 </style>
 
 <h1>Hello {name}! {version}</h1>

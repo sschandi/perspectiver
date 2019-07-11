@@ -260,15 +260,15 @@ function deleteSelectedImage() {
 </style>
 
 <h1>Layout Images</h1>
-<ImportImages on:image="{importImage}"/>
-<div id="layout-container">
-  <canvas id="layout" bind:this="{canvasElement}">
-  </canvas>
-  {#if showRemove}
-    <div class="remove">
-      <button on:click="{deleteSelectedImage}">Delete selected image</button>
-    </div>
-  {/if}
-</div>
-<button on:click="{getImages}">Get Images</button>
+<ImportImages on:image="{importImage}">
+  <div id="layout-container">
+    <canvas id="layout" bind:this="{canvasElement}">
+    </canvas>
+    {#if showRemove}
+      <div class="remove">
+        <button on:click="{deleteSelectedImage}">Delete selected image</button>
+      </div>
+    {/if}
+  </div>
+</ImportImages>
 <button on:click="{renderCanvas}">RenderCanvas</button>
