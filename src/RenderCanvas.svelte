@@ -23,10 +23,10 @@ let scaleFactor = 1.1
 let colorPicker
 let getImageButton
 
-let shadowColor = '#222831'
+let shadowColor = 'rgba(0, 0, 0, 0.4)'
 let shadowBlur = 30
-let shadowOffsetX = -5
-let shadowOffsetY = 20
+let shadowOffsetX = 0
+let shadowOffsetY = 15
 let transformMatrix = [1, -0.5, 1, 0.5, 0, 0]
 let rotate = 0
 let imageSort = (images) => {
@@ -328,7 +328,7 @@ h2 {
 }
 </style>
 
-<h1>Render Canvas</h1>
+<h1>Result</h1>
 <ChooseDesign on:design="{setupDesign}"/>
 <div class="ui-controls">
   <h2>Customize</h2>
@@ -378,7 +378,8 @@ h2 {
         on:input="{setupCanvas}"
       >
     </div>
-    <div class="color-picker-group">
+    <!-- Hidden because input color does not have support for rgba which looks better -->
+    <!-- <div class="color-picker-group">
       <label for="canvas-shadow-color">Shadow Colour</label>
       <input
         id="canvas-shadow-color"
@@ -391,7 +392,7 @@ h2 {
         style="background-color: {shadowColor}"
         on:click="{() => colorPicker.click()}"
       />
-    </div>
+    </div> -->
   </div>
 </div>
 <div class="render-container">
@@ -413,7 +414,7 @@ h2 {
   </div>
   <div class="canvas-info">
     <p>
-      Add Images by dragging to canvas below or
+      
     </p>
   </div>
 </div>
