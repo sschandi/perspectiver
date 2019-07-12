@@ -39,6 +39,10 @@ function upload(data) {
 </script>
 
 <style>
+.info {
+  text-align: center;
+  padding: 1rem;
+}
 .image-input-upload {
   position: absolute;
   visibility: hidden;
@@ -58,8 +62,12 @@ function upload(data) {
   multiple="multiple"
   on:change="{inputImage}"
 />
-<p>Add Images by dragging to canvas below or</p>
-<button on:click="{clickImage}">Click Here</button>
+<div class="info">
+  <p>
+    Add Images by dragging to canvas below or
+    <span class="link" on:click="{clickImage}">Click Here</span>
+  </p>
+</div>
 <div
   class="image-dropper {imageUploadActive ? 'active' : ''}"
   on:dragover|preventDefault="{() => imageUploadActive = true}"

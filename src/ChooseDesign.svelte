@@ -5,6 +5,7 @@ const dispatch = createEventDispatcher()
 
 const designs = [
   {
+    id: 0,
     image: 'assets/square-placeholder.jpg',
     shadowColor: '#222831',
     shadowBlur: 30,
@@ -19,6 +20,7 @@ const designs = [
     }
   },
   {
+    id: 1,
     image: 'assets/square-placeholder.jpg',
     shadowColor: '#415145',
     shadowBlur: 10,
@@ -33,21 +35,46 @@ const designs = [
     }
   }
 ]
+let active = 0
 
 function selectDesign(design) {
+  active = design.id
   dispatch('design', design)
 }
 
 </script>
 
 <style>
+#choose-design {
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
 img {
+  box-sizing: border-box;
   max-height: 100px;
+  max-width: 100px;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.active {
+  border: 3px solid var(--font-header);
+}
+h2 {
+  margin-top: 0;
 }
 </style>
 
-<h2>Choose A Design</h2>
-{#each designs as design}
-  <img src={design.image} alt="Design Preview">
-  <button on:click="{() => selectDesign(design)}">Select</button>
-{/each}
+<div id="choose-design">
+  <h2>Design</h2>
+  {#each designs as design}
+    <img
+      src={design.image}
+      class:active={design.id === active}
+      alt="Design Preview"
+      on:click="{() => selectDesign(design)}"
+    >
+  {/each}
+</div>

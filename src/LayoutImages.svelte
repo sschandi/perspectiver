@@ -2,7 +2,7 @@
 import { onMount, createEventDispatcher } from "svelte";
 import { fabric } from "fabric";
 import { viewport } from './state/viewport.js'
-import { fade } from 'svelte/transition'
+import { fade, slide } from 'svelte/transition'
 import ImportImages from './ImportImages.svelte'
 
 export let showLayout = true
@@ -23,7 +23,6 @@ let showRemove = false
 let container
 let measuringWrapper
 
-$: setCanvasSize($viewport.width)
 $: if (container) {
   if (showLayout) {
       container.style.height = measuringWrapper.clientHeight + 'px'
@@ -39,7 +38,7 @@ onMount(() => {
   canvas = new fabric.Canvas("layout", {
     selection: false
   });
-  setCanvasSize($viewport.width, $viewport.height)
+  setCanvasSize(canvasWidth, canvasHeight)
   addGrid()
 
   // addImageFromURL("http://fabricjs.com/assets/pug_small.jpg")
@@ -165,16 +164,12 @@ onMount(() => {
   });
 });
 
-function renderCanvas() {
-  dispatch('render', getImages())
-}
-
 function setCanvasSize(width, height) {
   if (!canvas) {
     return
   }
-  canvas.setWidth(width - 20)
-  canvas.setHeight(height - 20)
+  canvas.setWidth(width)
+  canvas.setHeight(height)
 }
 
 function addImageFromURL(url) {
@@ -228,11 +223,11 @@ function getImages() {
 function addGrid() {
   for (var i = 0; i < (canvasWidth / grid); i++) {
     canvas.add(new fabric.Line([i * grid, 0, i * grid, canvasWidth], {
-      stroke: '#ccc',
+      stroke: '#f2eff8',
       selectable: false
     }));
     canvas.add(new fabric.Line([0, i * grid, canvasWidth, i * grid], {
-      stroke: '#ccc',
+      stroke: '#f2eff8',
       selectable: false
     }))
   }
@@ -244,14 +239,12 @@ function removeGrid() {
   }
 }
 
-// Unused
-function toggleGrid() {
-  if (showGrid) {
-    removeGrid()
+function toggleRender(render) {
+  if (render) {
+    dispatch('render', getImages())
   } else {
-    addGrid()
+    dispatch('back', true)
   }
-  showGrid = !showGrid
 }
 
 function deleteSelectedImage() {
@@ -262,12 +255,21 @@ function deleteSelectedImage() {
 </script>
 
 <style>
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 #layout-container {
+  position: relative;
   transition: height 400ms ease-in-out;
   overflow: hidden;
+  background-color: var(--white);
+  border-radius: 1rem;
 }
 #layout-canvas-container {
   position: relative;
+  max-height: calc(100vh - 250px);
 }
 .remove {
   position: absolute;
@@ -276,25 +278,27 @@ function deleteSelectedImage() {
 }
 </style>
 
-<div>
+<div class="title">
   <h1>Layout Images</h1>
-  {#if showLayout}
-    <button on:click="{renderCanvas}">RenderCanvas</button>
-  {:else}
-    <button on:click="{() => dispatch('back', true)}">Back</button>
-  {/if}
+  <button class="btn" on:click="{() => toggleRender(showLayout)}">
+    {#if showLayout}
+      <span>Render</span>
+    {:else}
+      <span>Back</span>
+    {/if}
+  </button>
 </div>
 <div id="layout-container" bind:this="{container}">
+  {#if showRemove}
+    <div class="remove" transition:fade>
+      <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
+    </div>
+  {/if}
   <div class="container-measure" bind:this="{measuringWrapper}">
     <ImportImages on:image="{importImage}">
       <div id="layout-canvas-container">
         <canvas id="layout" bind:this="{canvasElement}">
         </canvas>
-        {#if showRemove}
-          <div class="remove" transition:fade>
-            <button on:click="{deleteSelectedImage}">Delete selected image</button>
-          </div>
-        {/if}
       </div>
     </ImportImages>
   </div>

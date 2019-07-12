@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte'
-import ChooseDesign from './ChooseDesign.svelte'
 import { createEventDispatcher } from 'svelte'
+import ChooseDesign from './ChooseDesign.svelte'
 
 export let images = []
 
@@ -19,6 +19,9 @@ let lastY = 600/2
 let dragged = false
 let dragStart = null
 let scaleFactor = 1.1
+
+let colorPicker
+let getImageButton
 
 let shadowColor = '#222831'
 let shadowBlur = 30
@@ -67,7 +70,6 @@ function setupCanvas() {
 function setupDesign(event) {
   const design = event.detail
   shadowColor = design.shadowColor
-  console.log(shadowColor)
   shadowBlur = design.shadowBlur
   shadowOffsetX = design.shadowOffsetX
   shadowOffsetY = design.shadowOffsetY
@@ -123,17 +125,17 @@ function getImage() {
   // For screenshots to work with WebGL renderer, preserveDrawingBuffer should be set to true.
   // open in new window like this
   var w = window.open('', '');
-  w.document.title = "Screenshot";
+  w.document.title = "Perspective";
   var img = new Image();
   img.src = canvas.toDataURL();
 
   w.document.body.appendChild(img);
 
   // download file like 
-  // var a = document.createElement('a');
-  // a.href = renderer.domElement.toDataURL().replace("image/png", "image/octet-stream");
-  // a.download = 'canvas.png'
-  // a.click();
+  // var a = document.createElement('a')
+  // a.href = canvas.toDataURL()
+  // a.download = 'perspective.png'
+  // a.click()
 }
 
 function clearCanvas() {
@@ -262,62 +264,156 @@ function trackTransforms(ctx) {
 </script>
 
 <style>
+.render-container {
+  background-color: var(--white);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+.canvas-container {
+  display: flex;
+  justify-content: center;
+}
+.canvas-padding {
+  flex-grow: 1;
+  background-color: var(--font);
+}
+.info {
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--grey);
+}
+.ui-controls {
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.ui-controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.color-picker-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.input-color {
+  width: 100px;
+  height: 32px;
+  border-radius: 50px;
+	margin: 0;
+  cursor: pointer;
+}
+#canvas-shadow-color {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 canvas {
-  border: 1px solid black;
-  max-width: 100vw;
+  max-width: 100%;
+}
+.canvas-info {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid var(--grey);
+}
+h2 {
+  margin-top: 0;
 }
 </style>
-<ChooseDesign on:design="{setupDesign}"/>
-<h1>Render Canvas</h1>
 
-{#await processedImagesPromise}
-  <p>...waiting</p>
-{:then res}
-<input
-  type="number"
-  bind:value={canvasWidth}
-  on:input="{setupCanvas}"
-  min="1"
-/>
-{canvasWidth}px Width
-<input
-  type="number"
-  bind:value={canvasHeight}
-  on:input="{setupCanvas}"
-  min="1"
-/>
-{canvasHeight}px Height
-Shadow Blur
-<input
-  type=number bind:value={shadowBlur}
-  min="0"
-  on:input="{setupCanvas}"
->
-Shadow Offset X
-<input
-  type=number bind:value={shadowOffsetX}
-  on:input="{setupCanvas}"
->
-Shadow Offset Y
-<input
-  type=number bind:value={shadowOffsetY}
-  on:input="{setupCanvas}"
->
-Shadow Color
-<input
-  type="color" bind:value={shadowColor}
-  on:input="{setupCanvas}"
->
-{:catch error}
-  <p>Error {error}</p>
-{/await}
-<canvas
-  id="render-canvas"
-  bind:this="{canvas}"
-  on:mousedown="{canvasMouseDown}"
-  on:mousemove="{canvasMouseMove}"
-  on:mouseup="{canvasMouseUp}"
-  on:mousewheel="{canvasScroll}"
-  on:DOMMouseScroll="{canvasScroll}"
-></canvas>
-<button on:click="{getImage}">Get Image</button>
+<h1>Render Canvas</h1>
+<ChooseDesign on:design="{setupDesign}"/>
+<div class="ui-controls">
+  <h2>Customize</h2>
+  <div class="ui-controls-group">
+    <div>
+      <label for="canvas-width">Width (px)</label>
+      <input
+        id="canvas-width"
+        type="number"
+        bind:value={canvasWidth}
+        on:input="{setupCanvas}"
+        min="1"
+      />
+    </div>
+    <div>
+      <label for="canvas-height">Height (px)</label>
+      <input
+        id="canvas-height"
+        type="number"
+        bind:value={canvasHeight}
+        on:input="{setupCanvas}"
+        min="1"
+      />
+    </div>
+    <div>
+      <label for="canvas-blur">Shadow Blur</label>
+      <input
+        id="canvas-blur"
+        type=number bind:value={shadowBlur}
+        min="0"
+        on:input="{setupCanvas}"
+      >
+    </div>
+    <div>
+      <label for="canvas-offset-x">Shadow Offset X</label>
+      <input
+        id="canvas-offset-x"
+        type=number bind:value={shadowOffsetX}
+        on:input="{setupCanvas}"
+      >
+    </div>
+    <div>
+      <label for="canvas-offset-y">Shadow Offset Y</label>
+      <input
+        id="canvas-offset-y"
+        type=number bind:value={shadowOffsetY}
+        on:input="{setupCanvas}"
+      >
+    </div>
+    <div class="color-picker-group">
+      <label for="canvas-shadow-color">Shadow Colour</label>
+      <input
+        id="canvas-shadow-color"
+        bind:this="{colorPicker}"
+        type="color" bind:value={shadowColor}
+        on:input="{setupCanvas}"
+      >
+      <div
+        class="input-color"
+        style="background-color: {shadowColor}"
+        on:click="{() => colorPicker.click()}"
+      />
+    </div>
+  </div>
+</div>
+<div class="render-container">
+  <div class="info">
+    <button bind:this="{getImageButton}" class="btn" on:click="{getImage}">Get Image</button>
+  </div>
+  <div class="canvas-container">
+    <div class="canvas-padding"></div>
+    <canvas
+      id="render-canvas"
+      bind:this="{canvas}"
+      on:mousedown="{canvasMouseDown}"
+      on:mousemove="{canvasMouseMove}"
+      on:mouseup="{canvasMouseUp}"
+      on:mousewheel="{canvasScroll}"
+      on:DOMMouseScroll="{canvasScroll}"
+    ></canvas>
+    <div class="canvas-padding"></div>
+  </div>
+  <div class="canvas-info">
+    <p>
+      Add Images by dragging to canvas below or
+    </p>
+  </div>
+</div>
