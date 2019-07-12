@@ -13,20 +13,29 @@
 		showRender = true
 		showLayout = false
 	}
+
+	function handleBack() {
+		showRender = false
+		showLayout = true
+	}
 </script>
 
 <style>
 :global(:root) {
-	--primary: #aaa333;
-	--grey: #f2eff8;
-	--font: #98989a;
-	--font-header: #242a61;
+	--primary: #7D47F0;
+	--secondary: #0FD3C8;
+	--grey: #dae1ef;
+	--font: #7286B3;
+	--font-header: #262939;
 	--white: #ffffff;
 }
 :global(body) {
 	background-color: var(--grey);
 	color: var(--font);
+	font-family: 'Didact Gothic', sans-serif;
 	margin: 0;
+	padding: 0;
+	min-width: 768px;
 	overflow-y: scroll;
 }
 :global(h1, h2, h3, h4) {
@@ -44,12 +53,15 @@
 	padding: 0.5rem;
 	margin: 0;
 }
+:global(input:focus) {
+	outline: none;
+}
 :global(label) {
 	margin-bottom: 0.5rem;
 }
 :global(.btn) {
 	border: none;
-	background-color: var(--font);
+	background-color: var(--secondary);
 	color: var(--white);
 	border-radius: 50px;
 	padding: 0.5rem 1rem;
@@ -72,10 +84,7 @@
 
 <div class="main">
 	<Header/>
-	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{() => {
-		showRender = false
-		showLayout = true
-	}}"/>
+	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
 	<div style="display: {showRender ? 'block' : 'none'};">
 		<RenderCanvas images={images}/>
 	</div>

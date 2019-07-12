@@ -275,7 +275,7 @@ function trackTransforms(ctx) {
 }
 .canvas-padding {
   flex-grow: 1;
-  background-color: var(--font);
+  background-color: var(--primary);
 }
 .info {
   text-align: center;
@@ -397,6 +397,7 @@ h2 {
 </div>
 <div class="render-container">
   <div class="info">
+    <p>Pan with left click, zoom with scroll wheel. Everything in the canvas will be rendered.</p>
     <button bind:this="{getImageButton}" class="btn" on:click="{getImage}">Get Image</button>
   </div>
   <div class="canvas-container">

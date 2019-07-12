@@ -89,14 +89,14 @@ function selectDesign(design) {
 }
 img {
   box-sizing: border-box;
-  width: 25%;
+  width: 15%;
   min-width: 200px;
   cursor: pointer;
   padding: 1rem;
   border-radius: 0.5rem;
 }
 .active {
-  border: 3px solid var(--font-header);
+  border: 3px solid var(--primary);
 }
 h2 {
   margin-top: 0;

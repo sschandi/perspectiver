@@ -266,6 +266,7 @@ function deleteSelectedImage() {
   overflow: hidden;
   background-color: var(--white);
   border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 #layout-canvas-container {
   position: relative;
