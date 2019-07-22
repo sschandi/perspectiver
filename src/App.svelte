@@ -1,3 +1,11 @@
+<div class="main">
+	<Header/>
+	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
+	<div style="display: {showRender ? 'block' : 'none'};">
+		<RenderCanvas images={images}/>
+	</div>
+</div>
+
 <script>
 	import Header from './Header.svelte'
 	import LayoutImages from './LayoutImages.svelte'
@@ -43,7 +51,6 @@
 }
 :global(p) {
 	margin: 0;
-	/* color: var(--primary); */
 }
 :global(input) {
 	width: 100px;
@@ -81,11 +88,3 @@
 	padding: 0 4rem;
 }
 </style>
-
-<div class="main">
-	<Header/>
-	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
-	<div style="display: {showRender ? 'block' : 'none'};">
-		<RenderCanvas images={images}/>
-	</div>
-</div>

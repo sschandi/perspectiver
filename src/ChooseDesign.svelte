@@ -1,8 +1,21 @@
+<div id="choose-design">
+  <h2>Design</h2>
+  <div class="designs">
+    {#each designs as design}
+      <img
+        src={design.image}
+        class:active={design.id === active}
+        alt="Design Preview"
+        on:click="{() => selectDesign(design)}"
+      >
+    {/each}
+  </div>
+</div>
+
 <script>
 import { createEventDispatcher } from 'svelte'
 
 const dispatch = createEventDispatcher()
-
 const designs = [
   {
     id: 0,
@@ -102,17 +115,3 @@ h2 {
   margin-top: 0;
 }
 </style>
-
-<div id="choose-design">
-  <h2>Design</h2>
-  <div class="designs">
-    {#each designs as design}
-      <img
-        src={design.image}
-        class:active={design.id === active}
-        alt="Design Preview"
-        on:click="{() => selectDesign(design)}"
-      >
-    {/each}
-  </div>
-</div>

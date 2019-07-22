@@ -1,3 +1,35 @@
+<div class="header">
+  <div class="header-row row-1">
+    <div class="accent accent-left-1"/>
+    <div class="accent accent-left-2"/>
+    <div class="accent accent-left-3"/>
+    <div class="accent"/>
+    <div class="accent accent-right-1"/>
+    <div class="accent accent-right-2"/>
+    <div class="accent accent-right-3"/>
+  </div>
+  <div class="header-row row-2">
+    <div class="accent accent-left-1"/>
+    <div class="accent accent-left-2"/>
+    <div class="accent accent-left-3"/>
+    <div class="title">
+      <h1 class="title-text">Perspective</h1>
+    </div>
+    <div class="accent accent-right-1"/>
+    <div class="accent accent-right-2"/>
+    <div class="accent accent-right-3"/>
+  </div>
+  <div class="header-row row-3">
+    <div class="accent accent-left-1"/>
+    <div class="accent accent-left-2"/>
+    <div class="accent accent-left-3"/>
+    <div class="accent"/>
+    <div class="accent accent-right-1"/>
+    <div class="accent accent-right-2"/>
+    <div class="accent accent-right-3"/>
+  </div>
+</div>
+
 <style>
 .header {
   display: flex;
@@ -126,35 +158,3 @@ p {
   }
 }
 </style>
-
-<div class="header">
-  <div class="header-row row-1">
-    <div class="accent accent-left-1"/>
-    <div class="accent accent-left-2"/>
-    <div class="accent accent-left-3"/>
-    <div class="accent"/>
-    <div class="accent accent-right-1"/>
-    <div class="accent accent-right-2"/>
-    <div class="accent accent-right-3"/>
-  </div>
-  <div class="header-row row-2">
-    <div class="accent accent-left-1"/>
-    <div class="accent accent-left-2"/>
-    <div class="accent accent-left-3"/>
-    <div class="title">
-      <h1 class="title-text">Perspective</h1>
-    </div>
-    <div class="accent accent-right-1"/>
-    <div class="accent accent-right-2"/>
-    <div class="accent accent-right-3"/>
-  </div>
-  <div class="header-row row-3">
-    <div class="accent accent-left-1"/>
-    <div class="accent accent-left-2"/>
-    <div class="accent accent-left-3"/>
-    <div class="accent"/>
-    <div class="accent accent-right-1"/>
-    <div class="accent accent-right-2"/>
-    <div class="accent accent-right-3"/>
-  </div>
-</div>

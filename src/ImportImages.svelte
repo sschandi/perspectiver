@@ -1,8 +1,31 @@
+<input
+  bind:this="{uploader}"
+  type="file"
+  accept="Image/*"
+  class="image-input-upload"
+  multiple="multiple"
+  on:change="{inputImage}"
+/>
+<div class="info">
+  <p>
+    Add Images by dragging to canvas below or
+    <span class="link" on:click="{clickImage}">Click Here</span>
+  </p>
+</div>
+<div
+  class="image-dropper {imageUploadActive ? 'active' : ''}"
+  on:dragover|preventDefault="{() => imageUploadActive = true}"
+  on:dragenter|preventDefault=""
+  on:dragleave|preventDefault="{() => imageUploadActive = false}"
+  on:drop|preventDefault="{dropImage}"
+>
+  <slot/>
+</div>
+
 <script>
 import { createEventDispatcher } from 'svelte'
 
 const dispatch = createEventDispatcher()
-
 let uploader
 let imageUploadActive = false
 
@@ -10,7 +33,7 @@ function dropImage(e) {
   const files = [].slice.call(e.dataTransfer.files)
   files.forEach((file) => {
     processFile(file)
-  });
+  })
   imageUploadActive = false
 }
 
@@ -53,27 +76,3 @@ function upload(data) {
   background-color: azure;
 }
 </style>
-
-<input
-  bind:this="{uploader}"
-  type="file"
-  accept="Image/*"
-  class="image-input-upload"
-  multiple="multiple"
-  on:change="{inputImage}"
-/>
-<div class="info">
-  <p>
-    Add Images by dragging to canvas below or
-    <span class="link" on:click="{clickImage}">Click Here</span>
-  </p>
-</div>
-<div
-  class="image-dropper {imageUploadActive ? 'active' : ''}"
-  on:dragover|preventDefault="{() => imageUploadActive = true}"
-  on:dragenter|preventDefault=""
-  on:dragleave|preventDefault="{() => imageUploadActive = false}"
-  on:drop|preventDefault="{dropImage}"
->
-  <slot/>
-</div>
