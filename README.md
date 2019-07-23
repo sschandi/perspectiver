@@ -1,68 +1,33 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Perspectiver
 
----
+Add perspective to Images.
 
-# svelte app
+## [Live Site](https://perspective-image.netlify.com/)
+Example:
+![Example](public/assets/design-0.png)
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## Why
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+Perspective designs are used in many many mock-ups, previews, and headers to give images a bit more visual interest. However, when I searched for a tool to easily transform my precomiled images into a different perspective, I found nothing that could do what I wanted with minimal friction... so I decided to make my own. 
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+## Svelte
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+This project is made with [Svelte](https://svelte.dev/), a compile to JavaScript framework for building
+user interfaces. Svelte's compile to JavaScript process allows it to skip using the virtual DOM entirely.
 
-
-## Get started
-
-Install the dependencies...
+## Installation
 
 ```bash
-cd svelte-app
+cd perspectiver
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
-
+Developement with hot reload on localhost:5000
 ```bash
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-now
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
+Build
 ```bash
 npm run build
-surge public
 ```
