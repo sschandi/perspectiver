@@ -8,9 +8,10 @@
 />
 <div class="info">
   <p>
-    Add Images by dragging to canvas below or
+    Add images by dragging them to canvas below or
     <span class="link" on:click="{clickImage}">Click Here</span>
   </p>
+  <slot name="info"/>
 </div>
 <div
   class="image-dropper {imageUploadActive ? 'active' : ''}"
