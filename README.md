@@ -3,8 +3,10 @@
 Add perspective to Images.
 
 ## [Live Site](https://perspective-image.netlify.com/)
-Example:
-![Example](public/assets/design-0.png)
+<img src="public/assets/design-0.png" width="24%" alt="Example 1">
+<img src="public/assets/design-1.png" width="24%" alt="Example 2">
+<img src="public/assets/design-2.png" width="24%" alt="Example 3">
+<img src="public/assets/design-3.png" width="24%" alt="Example 4">
 
 ## Why
 
