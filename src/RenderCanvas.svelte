@@ -1,75 +1,8 @@
-<h1>Result</h1>
-<ChooseDesign on:design="{setupDesign}"/>
-<div class="ui-controls">
-  <h2>Customize</h2>
-  <div class="ui-controls-group">
-    <div>
-      <label for="canvas-width">Width (px)</label>
-      <input
-        id="canvas-width"
-        type="number"
-        bind:value={canvasWidth}
-        on:input="{setupCanvas}"
-        min="1"
-      />
-    </div>
-    <div>
-      <label for="canvas-height">Height (px)</label>
-      <input
-        id="canvas-height"
-        type="number"
-        bind:value={canvasHeight}
-        on:input="{setupCanvas}"
-        min="1"
-      />
-    </div>
-    <div>
-      <label for="canvas-blur">Shadow Blur</label>
-      <input
-        id="canvas-blur"
-        type=number bind:value={shadowBlur}
-        min="0"
-        on:input="{setupCanvas}"
-      >
-    </div>
-    <div>
-      <label for="canvas-offset-x">Shadow Offset X</label>
-      <input
-        id="canvas-offset-x"
-        type=number bind:value={shadowOffsetX}
-        on:input="{setupCanvas}"
-      >
-    </div>
-    <div>
-      <label for="canvas-offset-y">Shadow Offset Y</label>
-      <input
-        id="canvas-offset-y"
-        type=number bind:value={shadowOffsetY}
-        on:input="{setupCanvas}"
-      >
-    </div>
-    <!-- Hidden because input color does not have support for rgba which looks better -->
-    <!-- <div class="color-picker-group">
-      <label for="canvas-shadow-color">Shadow Colour</label>
-      <input
-        id="canvas-shadow-color"
-        bind:this="{colorPicker}"
-        type="color" bind:value={shadowColor}
-        on:input="{setupCanvas}"
-      >
-      <div
-        class="input-color"
-        style="background-color: {shadowColor}"
-        on:click="{() => colorPicker.click()}"
-      />
-    </div> -->
-  </div>
+<div class="title">
+  <h1>Result</h1>
+  <button class="btn" on:click="{getImage}">Get Image</button>
 </div>
 <div class="render-container">
-  <div class="info">
-    <p>Pan with left click, zoom with scroll wheel. Everything in the canvas will be rendered.</p>
-    <button bind:this="{getImageButton}" class="btn" on:click="{getImage}">Get Image</button>
-  </div>
   <div class="canvas-container">
     <div class="canvas-padding"></div>
     <canvas
@@ -83,10 +16,73 @@
     ></canvas>
     <div class="canvas-padding"></div>
   </div>
-  <div class="canvas-info">
-    <p>
-      
-    </p>
+  <div class="render-controls">
+    <div class="ui-controls">
+      <h2>Customize</h2>
+      <div class="ui-controls-group">
+        <div>
+          <label for="canvas-width">Width (px)</label>
+          <input
+            id="canvas-width"
+            type="number"
+            bind:value={canvasWidth}
+            on:input="{setupCanvas}"
+            min="1"
+          />
+        </div>
+        <div>
+          <label for="canvas-height">Height (px)</label>
+          <input
+            id="canvas-height"
+            type="number"
+            bind:value={canvasHeight}
+            on:input="{setupCanvas}"
+            min="1"
+          />
+        </div>
+        <div>
+          <label for="canvas-blur">Shadow Blur</label>
+          <input
+            id="canvas-blur"
+            type=number bind:value={shadowBlur}
+            min="0"
+            on:input="{setupCanvas}"
+          >
+        </div>
+        <div>
+          <label for="canvas-offset-x">Shadow Offset X</label>
+          <input
+            id="canvas-offset-x"
+            type=number bind:value={shadowOffsetX}
+            on:input="{setupCanvas}"
+          >
+        </div>
+        <div>
+          <label for="canvas-offset-y">Shadow Offset Y</label>
+          <input
+            id="canvas-offset-y"
+            type=number bind:value={shadowOffsetY}
+            on:input="{setupCanvas}"
+          >
+        </div>
+        <!-- Hidden because input color does not have support for rgba which looks better -->
+        <!-- <div class="color-picker-group">
+          <label for="canvas-shadow-color">Shadow Colour</label>
+          <input
+            id="canvas-shadow-color"
+            bind:this="{colorPicker}"
+            type="color" bind:value={shadowColor}
+            on:input="{setupCanvas}"
+          >
+          <div
+            class="input-color"
+            style="background-color: {shadowColor}"
+            on:click="{() => colorPicker.click()}"
+          />
+        </div> -->
+      </div>
+    </div>
+    <ChooseDesign on:design="{setupDesign}"/>
   </div>
 </div>
 
@@ -348,12 +344,28 @@ function trackTransforms(ctx) {
 </script>
 
 <style>
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--grey);
+  border-top: 1px solid var(--grey);
+  background-color: var(--white);
+}
 .render-container {
   background-color: var(--white);
-  border-radius: 1rem;
   margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--grey);
+}
+.render-controls {
+  width: 200px;
+  border-left: 1px solid var(--grey);
 }
 .canvas-container {
+  width: calc(100% - 200px);
   display: flex;
   justify-content: center;
 }

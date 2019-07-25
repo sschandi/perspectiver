@@ -1,5 +1,5 @@
 <div class="main">
-	<Header/>
+	<!-- <Header/> -->
 	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
 	<div style="display: {showRender ? 'block' : 'none'};">
 		<RenderCanvas images={images}/>
@@ -38,7 +38,7 @@
 	--white: #ffffff;
 }
 :global(body) {
-	background-color: var(--grey);
+	background-color: var(--white);
 	color: var(--font);
 	font-family: 'Didact Gothic', sans-serif;
 	margin: 0;
@@ -83,8 +83,5 @@
 :global(.link:hover) {
 	color: var(--font-header);
 	text-decoration: underline;
-}
-.main {
-	padding: 0 4rem;
 }
 </style>

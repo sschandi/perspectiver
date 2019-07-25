@@ -102,8 +102,7 @@ function selectDesign(design) {
 }
 img {
   box-sizing: border-box;
-  width: 15%;
-  min-width: 200px;
+  width: 100px;
   cursor: pointer;
   padding: 1rem;
   border-radius: 0.5rem;
