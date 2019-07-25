@@ -89,10 +89,7 @@ function selectDesign(design) {
 
 <style>
 #choose-design {
-  background-color: var(--white);
-  border-radius: 1rem;
   padding: 1rem;
-  margin: 1rem 0;
 }
 .designs {
   display: flex;
