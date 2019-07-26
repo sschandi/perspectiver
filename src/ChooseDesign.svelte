@@ -1,14 +1,17 @@
 <div id="choose-design">
   <h2>Design</h2>
   <div class="designs">
-    {#each designs as design}
+    <button class="btn" class:disabled="{active <= 0}" on:click={previousDesign}>
+      <img src="assets/arrow-up.svg" alt="Previous" class="arrow">
+    </button>
       <img
-        src={design.image}
-        class:active={design.id === active}
+        src={designs[active].image}
         alt="Design Preview"
-        on:click="{() => selectDesign(design)}"
+        on:click="{() => selectDesign(designs[active])}"
       >
-    {/each}
+    <button class="btn" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
+      <img src="assets/arrow-up.svg" alt="Previous" class="arrow arrow-down">
+    </button>
   </div>
 </div>
 
@@ -81,31 +84,56 @@ const designs = [
 let active = 0
 
 function selectDesign(design) {
-  active = design.id
+  // active = design.id
   dispatch('design', design)
 }
 
+function previousDesign() {
+  if (active > 0) {
+    active--
+  }
+}
+
+function nextDesign() {
+  if (active < designs.length - 1) {
+    active++
+  }
+}
 </script>
 
 <style>
 #choose-design {
   padding: 1rem;
+  border-bottom: 1px solid var(--grey);
 }
 .designs {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 img {
   box-sizing: border-box;
-  width: 100px;
+  width: 190px;
   cursor: pointer;
   padding: 1rem;
-  border-radius: 0.5rem;
 }
-.active {
-  border: 3px solid var(--primary);
+.btn {
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.arrow {
+  padding: 0;
+  width: 20px;
+}
+.arrow-down {
+  transform: rotate(180deg);
+}
+.disabled {
+  background-color: var(--grey);
+  cursor: default;
 }
 h2 {
   margin-top: 0;

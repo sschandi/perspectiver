@@ -21,6 +21,7 @@
     <div class="canvas-padding"></div>
   </div>
   <div class="render-controls">
+    <ChooseDesign on:design="{setupDesign}"/>
     <div class="ui-controls">
       <h2>Customize</h2>
       <div class="ui-controls-group">
@@ -86,7 +87,6 @@
         </div> -->
       </div>
     </div>
-    <ChooseDesign on:design="{setupDesign}"/>
   </div>
 </div>
 
