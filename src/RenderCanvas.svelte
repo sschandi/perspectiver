@@ -359,6 +359,10 @@ function trackTransforms(ctx) {
 }
 #render-canvas {
   cursor: move;
+  cursor: grab;
+}
+#render-canvas:active {
+  cursor: grabbing;
 }
 .render-container {
   background-color: var(--white);
