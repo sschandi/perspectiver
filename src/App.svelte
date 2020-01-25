@@ -1,7 +1,9 @@
 <div class="main">
 	<!-- <Header/> -->
-	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
-	<div style="display: {showRender ? 'block' : 'none'};">
+	<div class="main__layout">
+		<LayoutImages on:render="{handleRender}" on:back="{handleBack}"/>
+	</div>
+	<div class="main__render">
 		<RenderCanvas images={images}/>
 	</div>
 </div>
@@ -83,5 +85,23 @@
 :global(.link:hover) {
 	color: var(--font-header);
 	text-decoration: underline;
+}
+.main {
+	display: flex;
+	flex-wrap: wrap;
+}
+.main__layout {
+	width: 100%;
+}
+.main__render {
+	width: 100%;
+}
+@media (min-width: 900px) {
+	.main__layout {
+		width: 50%;
+	}
+	.main__render {
+		width: 50%;
+	}
 }
 </style>

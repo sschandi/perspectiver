@@ -357,6 +357,9 @@ function trackTransforms(ctx) {
   border-top: 1px solid var(--grey);
   background-color: var(--white);
 }
+#render-canvas {
+  cursor: move;
+}
 .render-container {
   background-color: var(--white);
   margin-bottom: 2rem;

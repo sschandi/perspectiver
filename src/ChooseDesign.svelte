@@ -7,7 +7,6 @@
       <img
         src={designs[active].image}
         alt="Design Preview"
-        on:click="{() => selectDesign(designs[active])}"
       >
     <button class="btn" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
       <img src="assets/arrow-up.svg" alt="Previous" class="arrow arrow-down">
@@ -92,12 +91,14 @@ function previousDesign() {
   if (active > 0) {
     active--
   }
+  selectDesign(designs[active])
 }
 
 function nextDesign() {
   if (active < designs.length - 1) {
     active++
   }
+  selectDesign(designs[active])
 }
 </script>
 
@@ -115,7 +116,6 @@ function nextDesign() {
 img {
   box-sizing: border-box;
   width: 190px;
-  cursor: pointer;
   padding: 1rem;
 }
 .btn {

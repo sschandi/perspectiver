@@ -1,20 +1,13 @@
 <div class="title">
   <h1>Layout Images</h1>
-  <button class="btn" on:click="{() => toggleRender(showLayout)}">
-    {#if showLayout}
-      <span>Render</span>
-    {:else}
-      <span>Back</span>
-    {/if}
-  </button>
 </div>
-<div id="layout-container" bind:this="{container}">
+<div id="layout-container">
   {#if showRemove}
     <div class="remove" transition:fade>
       <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
     </div>
   {/if}
-  <div class="container-measure" bind:this="{measuringWrapper}">
+  <div class="container-measure">
     <ImportImages on:image="{importImage}">
     <p slot="info">
       <span class="link" on:click="{addDefaultImages}">Click Here</span>
@@ -35,8 +28,6 @@ import { viewport } from './state/viewport.js'
 import { fade, slide } from 'svelte/transition'
 import ImportImages from './ImportImages.svelte'
 
-export let showLayout = true
-
 const dispatch = createEventDispatcher()
 
 const grid = 25
@@ -55,17 +46,6 @@ let canvasElement
 let canvas = null
 let showGrid = true
 let showRemove = false
-// Grow and Shrink transitions
-let container
-let measuringWrapper
-
-$: if (container) {
-  if (showLayout) {
-      container.style.height = measuringWrapper.clientHeight + 'px'
-  } else {
-    container.style.height = 0
-  }
-}
 
 onMount(() => {
   // canvasElement.width = canvasWidth
@@ -92,6 +72,7 @@ onMount(() => {
       left: Math.round(options.target.left / grid) * grid,
       top: Math.round(options.target.top / grid) * grid
     })
+    dispatch('render', getImages())
   })
 
   canvas.on('object:scaling', options => {
@@ -186,6 +167,7 @@ onMount(() => {
         break
     }
     target.set(attrs)
+    dispatch('render', getImages())
   })
 })
 
@@ -202,6 +184,7 @@ function addImageFromURL(url, left = 0, top = 0) {
     let canvasImg = img.set({ left, top, width: img.width, height: img.height, hasRotatingPoint: false })
     canvasImg.scaleToWidth(maxImageWidth, false)
     canvas.add(canvasImg)
+    dispatch('render', getImages())
   })
 }
 
@@ -267,17 +250,10 @@ function removeGrid() {
   }
 }
 
-function toggleRender(render) {
-  if (render) {
-    dispatch('render', getImages())
-  } else {
-    dispatch('back', true)
-  }
-}
-
 function deleteSelectedImage() {
   if (canvas.getActiveObject()) {
     canvas.remove(canvas.getActiveObject())
+    dispatch('render', getImages())
   }
 }
 </script>
