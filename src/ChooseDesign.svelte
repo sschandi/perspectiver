@@ -105,7 +105,6 @@ function nextDesign() {
 <style>
 #choose-design {
   padding: 1rem;
-  border-bottom: 1px solid var(--grey);
 }
 .designs {
   display: flex;

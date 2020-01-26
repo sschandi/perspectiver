@@ -1,90 +1,91 @@
-<div class="title">
-  <h1>Result</h1>
-  <button class="btn" on:click="{getImage}">Get Image</button>
-</div>
-<div class="render-container">
-  <div class="render-canvas-container">
-    <div class="canvas-padding"></div>
-    <div class="canvas-container">
+<div id="render">
+  <div class="title">
+    <button class="btn" on:click="{getImage}">Get Image</button>
+  </div>
+  <div class="render-container">
+    <div class="render-canvas-container">
       <div class="canvas-padding"></div>
-      <canvas
-        id="render-canvas"
-        bind:this="{canvas}"
-        on:mousedown="{canvasMouseDown}"
-        on:mousemove="{canvasMouseMove}"
-        on:mouseup="{canvasMouseUp}"
-        on:mousewheel="{canvasScroll}"
-        on:DOMMouseScroll="{canvasScroll}"
-      ></canvas>
+      <div class="canvas-container">
+        <div class="canvas-padding"></div>
+        <canvas
+          id="render-canvas"
+          bind:this="{canvas}"
+          on:mousedown="{canvasMouseDown}"
+          on:mousemove="{canvasMouseMove}"
+          on:mouseup="{canvasMouseUp}"
+          on:mousewheel="{canvasScroll}"
+          on:DOMMouseScroll="{canvasScroll}"
+        ></canvas>
+        <div class="canvas-padding"></div>
+      </div>
       <div class="canvas-padding"></div>
     </div>
-    <div class="canvas-padding"></div>
-  </div>
-  <div class="render-controls">
-    <ChooseDesign on:design="{setupDesign}"/>
-    <div class="ui-controls">
-      <h2>Customize</h2>
-      <div class="ui-controls-group">
-        <div class="ui-control">
-          <label for="canvas-width">Width (px)</label>
-          <input
-            id="canvas-width"
-            type="number"
-            bind:value={canvasWidth}
-            on:input="{setupCanvas}"
-            min="1"
-          />
+    <div class="render-controls">
+      <ChooseDesign on:design="{setupDesign}"/>
+      <div class="ui-controls">
+        <h2>Customize</h2>
+        <div class="ui-controls-group">
+          <div class="ui-control">
+            <label for="canvas-width">Width (px)</label>
+            <input
+              id="canvas-width"
+              type="number"
+              bind:value={canvasWidth}
+              on:input="{setupCanvas}"
+              min="1"
+            />
+          </div>
+          <div class="ui-control">
+            <label for="canvas-height">Height (px)</label>
+            <input
+              id="canvas-height"
+              type="number"
+              bind:value={canvasHeight}
+              on:input="{setupCanvas}"
+              min="1"
+            />
+          </div>
+          <div class="ui-control">
+            <label for="canvas-blur">Shadow Blur</label>
+            <input
+              id="canvas-blur"
+              type=number bind:value={shadowBlur}
+              min="0"
+              on:input="{setupCanvas}"
+            >
+          </div>
+          <div class="ui-control">
+            <label for="canvas-offset-x">Shadow Offset X</label>
+            <input
+              id="canvas-offset-x"
+              type=number bind:value={shadowOffsetX}
+              on:input="{setupCanvas}"
+            >
+          </div>
+          <div class="ui-control">
+            <label for="canvas-offset-y">Shadow Offset Y</label>
+            <input
+              id="canvas-offset-y"
+              type=number bind:value={shadowOffsetY}
+              on:input="{setupCanvas}"
+            >
+          </div>
+          <!-- Hidden because input color does not have support for rgba which looks better -->
+          <!-- <div class="color-picker-group" class="ui-control">
+            <label for="canvas-shadow-color">Shadow Colour</label>
+            <input
+              id="canvas-shadow-color"
+              bind:this="{colorPicker}"
+              type="color" bind:value={shadowColor}
+              on:input="{setupCanvas}"
+            >
+            <div
+              class="input-color"
+              style="background-color: {shadowColor}"
+              on:click="{() => colorPicker.click()}"
+            />
+          </div> -->
         </div>
-        <div class="ui-control">
-          <label for="canvas-height">Height (px)</label>
-          <input
-            id="canvas-height"
-            type="number"
-            bind:value={canvasHeight}
-            on:input="{setupCanvas}"
-            min="1"
-          />
-        </div>
-        <div class="ui-control">
-          <label for="canvas-blur">Shadow Blur</label>
-          <input
-            id="canvas-blur"
-            type=number bind:value={shadowBlur}
-            min="0"
-            on:input="{setupCanvas}"
-          >
-        </div>
-        <div class="ui-control">
-          <label for="canvas-offset-x">Shadow Offset X</label>
-          <input
-            id="canvas-offset-x"
-            type=number bind:value={shadowOffsetX}
-            on:input="{setupCanvas}"
-          >
-        </div>
-        <div class="ui-control">
-          <label for="canvas-offset-y">Shadow Offset Y</label>
-          <input
-            id="canvas-offset-y"
-            type=number bind:value={shadowOffsetY}
-            on:input="{setupCanvas}"
-          >
-        </div>
-        <!-- Hidden because input color does not have support for rgba which looks better -->
-        <!-- <div class="color-picker-group" class="ui-control">
-          <label for="canvas-shadow-color">Shadow Colour</label>
-          <input
-            id="canvas-shadow-color"
-            bind:this="{colorPicker}"
-            type="color" bind:value={shadowColor}
-            on:input="{setupCanvas}"
-          >
-          <div
-            class="input-color"
-            style="background-color: {shadowColor}"
-            on:click="{() => colorPicker.click()}"
-          />
-        </div> -->
       </div>
     </div>
   </div>
@@ -348,37 +349,38 @@ function trackTransforms(ctx) {
 </script>
 
 <style>
+#render {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .title {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0 1rem;
-  border-bottom: 1px solid var(--grey);
-  border-top: 1px solid var(--grey);
-  background-color: var(--white);
+  padding: 1rem;
+  min-height: 3rem;
 }
 #render-canvas {
   cursor: move;
   cursor: grab;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 #render-canvas:active {
   cursor: grabbing;
 }
 .render-container {
-  background-color: var(--white);
-  margin-bottom: 2rem;
+  flex: 1;
   display: flex;
-  /* align-items: center; */
-  border-bottom: 1px solid var(--grey);
 }
 .render-canvas-container {
   width: calc(100% - 200px);
   display: flex;
   flex-direction: column;
+  background-color: var(--white);
 }
 .render-controls {
   width: 200px;
-  border-left: 1px solid var(--grey);
 }
 .canvas-container {
   display: flex;
@@ -386,12 +388,11 @@ function trackTransforms(ctx) {
 }
 .canvas-padding {
   flex-grow: 1;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
 }
 .info {
   text-align: center;
   padding: 0.5rem;
-  border-bottom: 1px solid var(--grey);
 }
 .ui-controls {
   padding: 1rem;
@@ -405,6 +406,9 @@ function trackTransforms(ctx) {
 }
 .ui-control {
   margin-bottom: 0.5rem;
+}
+.ui-control input {
+  max-width: 100px;
 }
 .color-picker-group {
   display: flex;
@@ -432,7 +436,6 @@ canvas {
 .canvas-info {
   text-align: center;
   padding: 1rem;
-  border-top: 1px solid var(--grey);
 }
 h2 {
   margin-top: 0;

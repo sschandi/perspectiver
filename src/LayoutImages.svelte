@@ -1,23 +1,25 @@
-<div class="title">
-  <h1>Layout Images</h1>
-</div>
-<div id="layout-container">
-  {#if showRemove}
-    <div class="remove" transition:fade>
-      <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
-    </div>
-  {/if}
-  <div class="container-measure">
-    <ImportImages on:image="{importImage}">
-    <p slot="info">
-      <span class="link" on:click="{addDefaultImages}">Click Here</span>
-      for some boring placeholders.
-    </p>
-      <div id="layout-canvas-container">
-        <canvas id="layout" bind:this="{canvasElement}">
-        </canvas>
+<div id="layout-images">
+  <div class="title">
+    <h1>Layout Images</h1>
+  </div>
+  <div id="layout-container">
+    {#if showRemove}
+      <div class="remove" transition:fade>
+        <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
       </div>
-    </ImportImages>
+    {/if}
+    <div class="container-measure">
+      <ImportImages on:image="{importImage}">
+      <p slot="info">
+        <span class="link" on:click="{addDefaultImages}">Click Here</span>
+        for some boring placeholders.
+      </p>
+        <div id="layout-canvas-container">
+          <canvas id="layout" bind:this="{canvasElement}">
+          </canvas>
+        </div>
+      </ImportImages>
+    </div>
   </div>
 </div>
 
@@ -259,22 +261,24 @@ function deleteSelectedImage() {
 </script>
 
 <style>
+#layout-images {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
-  border-bottom: 1px solid var(--grey);
-  border-top: 1px solid var(--grey);
-  background-color: var(--white);
+  padding: 1rem;
+  height: 3rem;
 }
 #layout-container {
   position: relative;
+  flex: 1;
   transition: height 400ms ease-in-out;
   overflow: hidden;
   background-color: var(--white);
-  border-radius: 1rem;
-  margin-bottom: 1rem;
 }
 #layout-canvas-container {
   position: relative;

@@ -1,62 +1,62 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+:root {
+	--primary: #7D47F0;
+	--secondary: #0FD3C8;
+	--grey: #dae1ef;
+	--font: #4b5062;
+	--font-header: #4b5062;
+	--white: #ffffff;
+	--body-bg: #f7f9ff;
+	--body-bg-gradient: linear-gradient(45deg, #f7f9ff, #e7e8f1);
 }
-
 body {
-	color: #333;
+	/* background-color: var(--body-bg); */
+	background-image: var(--body-bg-gradient);
+	color: var(--font);
+	font-family: 'Raleway', sans-serif;
 	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	padding: 0;
+	min-width: 768px;
+	min-height: 100vh;
 }
-
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+h1, h2, h3, h4 {
+	font-weight: 400;
+	color: var(--font-header);
 }
-
-a:hover {
-	text-decoration: underline;
+p {
+	margin: 0;
 }
-
-a:visited {
-	color: rgb(0,80,160);
+input {
+	/* width: 100px;
+	height: 32px; */
+	border: none;
+	border-radius: 50px;
+	padding: 0.5rem 1rem;
+	background-color: #e7e8f1;
+  color: #6d7587;
+	box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3), inset -3px -3px 5px rgba(255, 255, 255, 0.5), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.02), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
 }
-
-label {
-	display: block;
-}
-
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
-
-input:disabled {
-	color: #ccc;
-}
-
-input[type="range"] {
-	height: 0;
-}
-
-button {
-	color: #333;
-	background-color: #f4f4f4;
+input:focus {
 	outline: none;
 }
-
-button:active {
-	background-color: #ddd;
+label {
+	margin-bottom: 0.5rem;
 }
-
-button:focus {
-	border-color: #666;
+.btn {
+	border-radius: 30px;
+  padding: 10px 40px;
+  font-size: 14px;
+  color: #6d7587;
+  background-color:#e7e8f1;
+  border: none;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(255, 255, 255, 0.5), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.05), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+	transition: all 500ms ease-in;
+}
+.link {
+	color: var(--font-header);
+	cursor: pointer;
+}
+.link:hover {
+	color: var(--font-header);
+	text-decoration: underline;
 }
