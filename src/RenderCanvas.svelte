@@ -1,6 +1,6 @@
 <div id="render">
   <div class="title">
-    <button class="btn" on:click="{getImage}">
+    <button id="get-image" class="btn" on:click="{getImage}">
       <span class="gradient-text">Get Image</span>
     </button>
   </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="render-controls">
       <ChooseDesign on:design="{setupDesign}"/>
-      <div class="ui-controls">
+      <div id="ui-controls" class="ui-controls">
         <div class="ui-controls-group">
           <div class="ui-control">
             <label for="canvas-width">Width (px)</label>
