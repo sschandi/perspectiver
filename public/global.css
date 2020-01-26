@@ -1,12 +1,12 @@
 :root {
-	--primary: #7D47F0;
-	--secondary: #0FD3C8;
+	--primary: #1758f1;
+	--secondary: #37dbe0;
 	--grey: #dae1ef;
 	--font: #4b5062;
 	--font-header: #4b5062;
 	--white: #ffffff;
 	--body-bg: #f7f9ff;
-	--body-bg-gradient: linear-gradient(45deg, #f7f9ff, #e7e8f1);
+	--body-bg-gradient: linear-gradient(45deg, #f8fafe, #f2f3fd);
 }
 body {
 	/* background-color: var(--body-bg); */
@@ -26,14 +26,13 @@ p {
 	margin: 0;
 }
 input {
-	/* width: 100px;
-	height: 32px; */
+	font-size: 18px;
 	border: none;
 	border-radius: 50px;
-	padding: 0.5rem 1rem;
-	background-color: #e7e8f1;
-  color: #6d7587;
-	box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3), inset -3px -3px 5px rgba(255, 255, 255, 0.5), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.02), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
+	padding: 0.5rem 1.5rem;
+	background-color: #f2f3fd;
+  color: var(--font);
+	box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.8), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
 }
 input:focus {
 	outline: none;
@@ -44,13 +43,22 @@ label {
 .btn {
 	border-radius: 30px;
   padding: 10px 40px;
-  font-size: 14px;
-  color: #6d7587;
-  background-color:#e7e8f1;
+  font-size: 20px;
+	/* color: #6d7587; */
+	color: var(--font);
+	background-color:#f2f3fd;
   border: none;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(255, 255, 255, 0.5), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.05), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.8), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
   cursor: pointer;
 	transition: all 500ms ease-in;
+}
+.btn-gradient {
+	color: var(--white);
+	background: linear-gradient(45deg, var(--primary), var(--secondary));
+}
+.btn.disabled {
+	opacity: 0.4;
+	cursor: default;
 }
 .link {
 	color: var(--font-header);
@@ -59,4 +67,10 @@ label {
 .link:hover {
 	color: var(--font-header);
 	text-decoration: underline;
+}
+
+.gradient-text {
+	background: linear-gradient(90deg, var(--primary), var(--secondary));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 }

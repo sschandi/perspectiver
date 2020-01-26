@@ -1,7 +1,9 @@
 <div class="main">
 	<!-- <Header/> -->
 	<div class="main__layout">
-		<LayoutImages on:render="{handleRender}" on:back="{handleBack}"/>
+		<LayoutImages on:render="{handleRender}" on:back="{handleBack}">
+			<h1 class="gradient-text">Perspectiver</h1>
+		</LayoutImages>
 	</div>
 	<div class="main__render">
 		<RenderCanvas images={images}/>

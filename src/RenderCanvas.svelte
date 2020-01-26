@@ -1,21 +1,25 @@
 <div id="render">
   <div class="title">
-    <button class="btn" on:click="{getImage}">Get Image</button>
+    <button class="btn" on:click="{getImage}">
+      <span class="gradient-text">Get Image</span>
+    </button>
   </div>
   <div class="render-container">
     <div class="render-canvas-container">
       <div class="canvas-padding"></div>
       <div class="canvas-container">
         <div class="canvas-padding"></div>
-        <canvas
-          id="render-canvas"
-          bind:this="{canvas}"
-          on:mousedown="{canvasMouseDown}"
-          on:mousemove="{canvasMouseMove}"
-          on:mouseup="{canvasMouseUp}"
-          on:mousewheel="{canvasScroll}"
-          on:DOMMouseScroll="{canvasScroll}"
-        ></canvas>
+        <div class="canvas-bg">
+          <canvas
+            id="render-canvas"
+            bind:this="{canvas}"
+            on:mousedown="{canvasMouseDown}"
+            on:mousemove="{canvasMouseMove}"
+            on:mouseup="{canvasMouseUp}"
+            on:mousewheel="{canvasScroll}"
+            on:DOMMouseScroll="{canvasScroll}"
+          ></canvas>
+        </div>
         <div class="canvas-padding"></div>
       </div>
       <div class="canvas-padding"></div>
@@ -23,7 +27,6 @@
     <div class="render-controls">
       <ChooseDesign on:design="{setupDesign}"/>
       <div class="ui-controls">
-        <h2>Customize</h2>
         <div class="ui-controls-group">
           <div class="ui-control">
             <label for="canvas-width">Width (px)</label>
@@ -104,7 +107,7 @@ let processedImagesPromise = processImages()
 let processedImages = []
 
 let canvas
-let canvasWidth = 1280
+let canvasWidth = 720
 let canvasHeight = 720
 let ctx = null
 let lastX = 600/2
@@ -361,10 +364,16 @@ function trackTransforms(ctx) {
   padding: 1rem;
   min-height: 3rem;
 }
+.canvas-bg {
+  margin: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  background-color: var(--white);
+}
 #render-canvas {
+  z-index: 2;
   cursor: move;
   cursor: grab;
-  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 #render-canvas:active {
   cursor: grabbing;
@@ -374,10 +383,11 @@ function trackTransforms(ctx) {
   display: flex;
 }
 .render-canvas-container {
+  position: relative;
   width: calc(100% - 200px);
   display: flex;
   flex-direction: column;
-  background-color: var(--white);
+  /* background: linear-gradient(45deg, var(--primary), var(--secondary)); */
 }
 .render-controls {
   width: 200px;
@@ -385,17 +395,17 @@ function trackTransforms(ctx) {
 .canvas-container {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .canvas-padding {
   flex-grow: 1;
-  /* background-color: var(--primary); */
 }
 .info {
   text-align: center;
   padding: 0.5rem;
 }
 .ui-controls {
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0;
 }
 .ui-controls-group {
   display: flex;
@@ -409,6 +419,10 @@ function trackTransforms(ctx) {
 }
 .ui-control input {
   max-width: 100px;
+}
+.ui-control label {
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 .color-picker-group {
   display: flex;

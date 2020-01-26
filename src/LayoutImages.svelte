@@ -1,11 +1,13 @@
 <div id="layout-images">
   <div class="title">
-    <h1>Layout Images</h1>
+    <slot />
   </div>
   <div id="layout-container">
     {#if showRemove}
       <div class="remove" transition:fade>
-        <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
+        <button class="btn" on:click="{deleteSelectedImage}">
+          <span class="gradient-text">Delete Selected</span>
+        </button>
       </div>
     {/if}
     <div class="container-measure">
@@ -186,7 +188,9 @@ function addImageFromURL(url, left = 0, top = 0) {
     let canvasImg = img.set({ left, top, width: img.width, height: img.height, hasRotatingPoint: false })
     canvasImg.scaleToWidth(maxImageWidth, false)
     canvas.add(canvasImg)
-    dispatch('render', getImages())
+    setTimeout(() => {
+      dispatch('render', getImages())
+    }, 100)
   })
 }
 
@@ -276,9 +280,13 @@ function deleteSelectedImage() {
 #layout-container {
   position: relative;
   flex: 1;
-  transition: height 400ms ease-in-out;
+  background-color: #eff1f9;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+  margin: 0 1rem 1rem 1rem;
   overflow: hidden;
-  background-color: var(--white);
+  transition: height 400ms ease-in-out;
 }
 #layout-canvas-container {
   position: relative;
@@ -286,7 +294,7 @@ function deleteSelectedImage() {
 }
 .remove {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1rem;
+  left: 1rem;
 }
 </style>

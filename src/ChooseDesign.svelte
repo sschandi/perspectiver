@@ -1,14 +1,16 @@
 <div id="choose-design">
-  <h2>Design</h2>
   <div class="designs">
-    <button class="btn" class:disabled="{active <= 0}" on:click={previousDesign}>
+    <button class="btn btn-gradient" class:disabled="{active <= 0}" on:click={previousDesign}>
       <img src="assets/arrow-up.svg" alt="Previous" class="arrow">
     </button>
+    <div class="design">
       <img
+        class="design-img"
         src={designs[active].image}
         alt="Design Preview"
       >
-    <button class="btn" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
+    </div>
+    <button class="btn btn-gradient" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
       <img src="assets/arrow-up.svg" alt="Previous" class="arrow arrow-down">
     </button>
   </div>
@@ -104,7 +106,7 @@ function nextDesign() {
 
 <style>
 #choose-design {
-  padding: 1rem;
+  padding: 1rem 1rem 0 0;
 }
 .designs {
   display: flex;
@@ -112,13 +114,23 @@ function nextDesign() {
   justify-content: center;
   align-items: center;
 }
-img {
+.design {
   box-sizing: border-box;
   width: 190px;
   padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+}
+.design-img {
+  width: 100%;
+  height: 100%;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  background-color: var(--white);
 }
 .btn {
-  padding: 0 0.5rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   margin: 0;
