@@ -7,12 +7,14 @@
 	--white: #ffffff;
 	--body-bg: #f7f9ff;
 	--body-bg-gradient: linear-gradient(45deg, #f8fafe, #f2f3fd);
+	--inset-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+	--shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
 }
 body {
 	/* background-color: var(--body-bg); */
 	background-image: var(--body-bg-gradient);
 	color: var(--font);
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Noto Sans', sans-serif;
 	margin: 0;
 	padding: 0;
 	min-width: 768px;
@@ -65,11 +67,11 @@ label {
 	cursor: default;
 }
 .link {
-	color: var(--font-header);
+	color: var(--primary);
 	cursor: pointer;
 }
 .link:hover {
-	color: var(--font-header);
+	color: var(--primary);
 	text-decoration: underline;
 }
 

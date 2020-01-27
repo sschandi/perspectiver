@@ -1,12 +1,16 @@
 <div class="main">
 	<!-- <Header/> -->
+	<Welcome on:tutorial={() => showTutorial = true} />
 	{#if showTutorial}
 	<Tutorial on:done={() => showTutorial = false} />
 	{/if}
 	<div class="main__layout">
 		<LayoutImages on:render="{handleRender}">
-			<h1 class="gradient-text">Perspectiver</h1>
-			<button on:click={() => showTutorial = true}>Tutorial</button>
+			<div class="header">
+				<div class="logo">P</div>
+				<h1 class="gradient-text">Perspectiver</h1>
+			</div>
+			<button class="btn btn-sm" on:click={() => showTutorial = true}>Tutorial</button>
 		</LayoutImages>
 	</div>
 	<div class="main__render">
@@ -15,18 +19,19 @@
 </div>
 
 <script>
-	import { slide } from 'svelte/transition'
-	import Header from './Header.svelte'
-	import LayoutImages from './LayoutImages.svelte'
-	import RenderCanvas from './RenderCanvas.svelte'
-	import Tutorial from './Tutorial.svelte'
+import { slide } from 'svelte/transition'
+import Header from './Header.svelte'
+import LayoutImages from './LayoutImages.svelte'
+import RenderCanvas from './RenderCanvas.svelte'
+import Tutorial from './Tutorial.svelte'
+import Welcome from './Welcome.svelte'
 
-	let images = []
-	let showTutorial = false
+let images = []
+let showTutorial = false
 
-	function handleRender(event) {
-		images = event.detail
-	}
+function handleRender(event) {
+	images = event.detail
+}
 </script>
 
 <style>
@@ -49,5 +54,23 @@
 		width: 50%;
 		height: 100vh;
 	}
+}
+.header {
+	display: flex;
+	align-items: center;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  border-radius: 0.25rem;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--white);
+	box-shadow: var(--shadow);
+	margin-right: 1rem;
 }
 </style>

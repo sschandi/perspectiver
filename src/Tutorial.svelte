@@ -94,7 +94,7 @@ function go(number) {
 <style>
 .tutorial-container {
   position: absolute;
-  z-index: 2000;
+  z-index: 4;
 }
 .tutorial {
   position: relative;
