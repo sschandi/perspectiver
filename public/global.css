@@ -52,6 +52,10 @@ label {
   cursor: pointer;
 	transition: all 500ms ease-in;
 }
+.btn-sm {
+	padding: 5px 10px;
+  font-size: 12px;
+}
 .btn-gradient {
 	color: var(--white);
 	background: linear-gradient(45deg, var(--primary), var(--secondary));

@@ -1,9 +1,12 @@
 <div class="main">
 	<!-- <Header/> -->
-	<Tutorial />
+	{#if showTutorial}
+	<Tutorial on:done={() => showTutorial = false} />
+	{/if}
 	<div class="main__layout">
-		<LayoutImages on:render="{handleRender}" on:back="{handleBack}">
+		<LayoutImages on:render="{handleRender}">
 			<h1 class="gradient-text">Perspectiver</h1>
+			<button on:click={() => showTutorial = true}>Tutorial</button>
 		</LayoutImages>
 	</div>
 	<div class="main__render">
@@ -19,18 +22,10 @@
 	import Tutorial from './Tutorial.svelte'
 
 	let images = []
-	let showLayout = true
-	let showRender = false
+	let showTutorial = false
 
 	function handleRender(event) {
 		images = event.detail
-		showRender = true
-		showLayout = false
-	}
-
-	function handleBack() {
-		showRender = false
-		showLayout = true
 	}
 </script>
 
