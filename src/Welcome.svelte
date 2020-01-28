@@ -60,6 +60,7 @@ function tutorial() {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: var(--white);
 }
 .welcome-body {
   padding: 2rem 3rem 3rem 3rem;

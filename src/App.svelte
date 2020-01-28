@@ -8,8 +8,14 @@
 			<div class="header">
 				<div class="logo">P</div>
 				<h1 class="gradient-text">Perspectiver</h1>
+				<button class="btn btn-icon" on:click={() => showTutorial = true}>
+					<span class="gradient-text">?</span>
+				</button>
 			</div>
-			<button class="btn btn-sm" on:click={() => showTutorial = true}>Tutorial</button>
+			<p class="well">
+				Created by
+				<a href="https://github.com/sschandi/" target="_blank" class="link">SS Chandi</a>
+			</p>
 		</LayoutImages>
 	</div>
 	<div class="main__render">
@@ -56,6 +62,12 @@ function handleRender(event) {
 .header {
 	display: flex;
 	align-items: center;
+}
+.header h1 {
+	margin-right: 0.5rem;
+}
+.well {
+	font-size: 16px;
 }
 .logo {
   width: 50px;

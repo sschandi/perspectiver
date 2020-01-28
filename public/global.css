@@ -27,7 +27,7 @@ h1, h2, h3, h4 {
 p {
 	margin: 0;
 }
-input {
+input, .well {
 	font-size: 18px;
 	border: none;
 	border-radius: 50px;
@@ -62,6 +62,12 @@ label {
 	color: var(--white);
 	background: linear-gradient(45deg, var(--primary), var(--secondary));
 }
+.btn-icon {
+	width: 40px;
+	height: 40px;
+	padding: 0.25rem;
+	font-size: 25px;
+}
 .btn.disabled {
 	opacity: 0.4;
 	cursor: default;
@@ -69,6 +75,7 @@ label {
 .link {
 	color: var(--primary);
 	cursor: pointer;
+	text-decoration: none;
 }
 .link:hover {
 	color: var(--primary);
