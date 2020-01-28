@@ -37,10 +37,10 @@ const dispatch = createEventDispatcher()
 const grid = 25
 const maxImageWidth = 200
 const defaultImages = [
-  { src: 'assets/square-placeholder.jpg', top: 0, left: 0 },
-  { src: 'assets/square-placeholder.jpg', top: 300, left: 0 },
-  { src: 'assets/square-placeholder.jpg', top: 300, left: 300 },
-  { src: 'assets/square-placeholder.jpg', top: 0, left: 300 },
+  { src: 'assets/placeholder-1.png', top: 0, left: 0 },
+  { src: 'assets/placeholder-2.png', top: 300, left: 0 },
+  { src: 'assets/placeholder-3.png', top: 300, left: 300 },
+  { src: 'assets/placeholder-4.png', top: 0, left: 300 },
 ]
 let canvasWidth = 1920
 let canvasHeight = 1080

@@ -64,7 +64,7 @@ const steps = [
   },
   {
     id: 4,
-    text: 'Get image. The result will open in a new window, right click to save!',
+    text: 'Get image. The result will open in a new window, right click to save! (You can also right click directly on the canvas).',
     target: 'get-image',
     left: true,
   }
