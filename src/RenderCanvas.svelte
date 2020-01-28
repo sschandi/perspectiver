@@ -5,7 +5,7 @@
     </button>
   </div>
   <div class="render-container">
-    <div class="render-canvas-container">
+    <div class="render-canvas-container" bind:clientHeight={containerHeight} bind:clientWidth={containerWidth}>
       <div class="canvas-padding"></div>
       <div class="canvas-container">
         <div class="canvas-padding"></div>
@@ -106,6 +106,9 @@ const dispatch = createEventDispatcher()
 let processedImagesPromise = processImages()
 let processedImages = []
 
+let containerHeight
+let containerWidth
+
 let canvas
 let canvasWidth = 720
 let canvasHeight = 720
@@ -117,7 +120,6 @@ let dragStart = null
 let scaleFactor = 1.1
 
 let colorPicker
-let getImageButton
 
 let shadowColor = 'rgba(0, 0, 0, 0.4)'
 let shadowBlur = 30
@@ -140,7 +142,12 @@ $: if (processedImages.length > 0) {
   redraw()
 }
 
+
 onMount(() => {
+  if (containerHeight) {
+    canvasHeight = containerHeight - 25
+    canvasWidth = containerWidth - 50
+  }
   ctx = canvas.getContext('2d')
   setupCanvas()
 })
@@ -365,7 +372,7 @@ function trackTransforms(ctx) {
   min-height: 3rem;
 }
 .canvas-bg {
-  margin: 1rem;
+  margin: 0 1rem 1rem 1rem;
   border-radius: 0.25rem;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
   background-color: var(--white);
