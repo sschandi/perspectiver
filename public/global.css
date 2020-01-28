@@ -78,5 +78,6 @@ label {
 .gradient-text {
 	background: linear-gradient(90deg, var(--primary), var(--secondary));
 	background-clip: text;
+	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
