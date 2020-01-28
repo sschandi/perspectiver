@@ -1,5 +1,4 @@
 <div class="main">
-	<!-- <Header/> -->
 	<Welcome on:tutorial={() => showTutorial = true} />
 	{#if showTutorial}
 	<Tutorial on:done={() => showTutorial = false} />
@@ -20,7 +19,6 @@
 
 <script>
 import { slide } from 'svelte/transition'
-import Header from './Header.svelte'
 import LayoutImages from './LayoutImages.svelte'
 import RenderCanvas from './RenderCanvas.svelte'
 import Tutorial from './Tutorial.svelte'
