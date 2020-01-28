@@ -2,7 +2,7 @@
 
 Add perspective to Images.
 
-## [Live Site](https://perspective-image.netlify.com/)
+## [Live Site](https://perspectiver.netlify.com/)
 <p algin="center">
 	<img src="public/assets/design-0.png" width="24%" alt="Example 1">
 	<img src="public/assets/design-1.png" width="24%" alt="Example 2">
