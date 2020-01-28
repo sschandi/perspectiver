@@ -1,30 +1,27 @@
-<div class="title">
-  <h1>Layout Images</h1>
-  <button class="btn" on:click="{() => toggleRender(showLayout)}">
-    {#if showLayout}
-      <span>Render</span>
-    {:else}
-      <span>Back</span>
-    {/if}
-  </button>
-</div>
-<div id="layout-container" bind:this="{container}">
-  {#if showRemove}
-    <div class="remove" transition:fade>
-      <button class="btn" on:click="{deleteSelectedImage}">Delete Selected</button>
-    </div>
-  {/if}
-  <div class="container-measure" bind:this="{measuringWrapper}">
-    <ImportImages on:image="{importImage}">
-    <p slot="info">
-      <span class="link" on:click="{addDefaultImages}">Click Here</span>
-      for some boring placeholders.
-    </p>
-      <div id="layout-canvas-container">
-        <canvas id="layout" bind:this="{canvasElement}">
-        </canvas>
+<div id="layout-images">
+  <div class="title">
+    <slot />
+  </div>
+  <div id="layout-container">
+    {#if showRemove}
+      <div class="remove" transition:fade>
+        <button class="btn" on:click="{deleteSelectedImage}">
+          <span class="gradient-text">Delete Selected</span>
+        </button>
       </div>
-    </ImportImages>
+    {/if}
+    <div class="container-measure">
+      <ImportImages on:image="{importImage}">
+      <p slot="info">
+        <span class="link" on:click="{addDefaultImages}">Click Here</span>
+        for some boring placeholders.
+      </p>
+        <div id="layout-canvas-container">
+          <canvas id="layout" bind:this="{canvasElement}">
+          </canvas>
+        </div>
+      </ImportImages>
+    </div>
   </div>
 </div>
 
@@ -35,17 +32,15 @@ import { viewport } from './state/viewport.js'
 import { fade, slide } from 'svelte/transition'
 import ImportImages from './ImportImages.svelte'
 
-export let showLayout = true
-
 const dispatch = createEventDispatcher()
 
 const grid = 25
 const maxImageWidth = 200
 const defaultImages = [
-  { src: 'assets/square-placeholder.jpg', top: 0, left: 0 },
-  { src: 'assets/square-placeholder.jpg', top: 300, left: 0 },
-  { src: 'assets/square-placeholder.jpg', top: 300, left: 300 },
-  { src: 'assets/square-placeholder.jpg', top: 0, left: 300 },
+  { src: 'assets/placeholder-1.png', top: 0, left: 0 },
+  { src: 'assets/placeholder-2.png', top: 300, left: 0 },
+  { src: 'assets/placeholder-3.png', top: 300, left: 300 },
+  { src: 'assets/placeholder-4.png', top: 0, left: 300 },
 ]
 let canvasWidth = 1920
 let canvasHeight = 1080
@@ -55,17 +50,6 @@ let canvasElement
 let canvas = null
 let showGrid = true
 let showRemove = false
-// Grow and Shrink transitions
-let container
-let measuringWrapper
-
-$: if (container) {
-  if (showLayout) {
-      container.style.height = measuringWrapper.clientHeight + 'px'
-  } else {
-    container.style.height = 0
-  }
-}
 
 onMount(() => {
   // canvasElement.width = canvasWidth
@@ -92,6 +76,7 @@ onMount(() => {
       left: Math.round(options.target.left / grid) * grid,
       top: Math.round(options.target.top / grid) * grid
     })
+    dispatch('render', getImages())
   })
 
   canvas.on('object:scaling', options => {
@@ -186,6 +171,7 @@ onMount(() => {
         break
     }
     target.set(attrs)
+    dispatch('render', getImages())
   })
 })
 
@@ -202,6 +188,9 @@ function addImageFromURL(url, left = 0, top = 0) {
     let canvasImg = img.set({ left, top, width: img.width, height: img.height, hasRotatingPoint: false })
     canvasImg.scaleToWidth(maxImageWidth, false)
     canvas.add(canvasImg)
+    setTimeout(() => {
+      dispatch('render', getImages())
+    }, 100)
   })
 }
 
@@ -267,34 +256,37 @@ function removeGrid() {
   }
 }
 
-function toggleRender(render) {
-  if (render) {
-    dispatch('render', getImages())
-  } else {
-    dispatch('back', true)
-  }
-}
-
 function deleteSelectedImage() {
   if (canvas.getActiveObject()) {
     canvas.remove(canvas.getActiveObject())
+    dispatch('render', getImages())
   }
 }
 </script>
 
 <style>
+#layout-images {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
+  height: 3rem;
 }
 #layout-container {
   position: relative;
-  transition: height 400ms ease-in-out;
+  flex: 1;
+  background-color: #eff1f9;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem 1rem;
   overflow: hidden;
-  background-color: var(--white);
-  border-radius: 1rem;
-  margin-bottom: 1rem;
+  transition: height 400ms ease-in-out;
 }
 #layout-canvas-container {
   position: relative;
@@ -302,7 +294,7 @@ function deleteSelectedImage() {
 }
 .remove {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1rem;
+  left: 1rem;
 }
 </style>

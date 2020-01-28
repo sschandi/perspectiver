@@ -1,14 +1,18 @@
 <div id="choose-design">
-  <h2>Design</h2>
   <div class="designs">
-    {#each designs as design}
+    <button class="btn btn-gradient" class:disabled="{active <= 0}" on:click={previousDesign}>
+      <img src="assets/arrow-up.svg" alt="Previous" class="arrow">
+    </button>
+    <div class="design">
       <img
-        src={design.image}
-        class:active={design.id === active}
+        class="design-img"
+        src={designs[active].image}
         alt="Design Preview"
-        on:click="{() => selectDesign(design)}"
       >
-    {/each}
+    </div>
+    <button class="btn btn-gradient" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
+      <img src="assets/arrow-up.svg" alt="Previous" class="arrow arrow-down">
+    </button>
   </div>
 </div>
 
@@ -81,35 +85,66 @@ const designs = [
 let active = 0
 
 function selectDesign(design) {
-  active = design.id
+  // active = design.id
   dispatch('design', design)
 }
 
+function previousDesign() {
+  if (active > 0) {
+    active--
+  }
+  selectDesign(designs[active])
+}
+
+function nextDesign() {
+  if (active < designs.length - 1) {
+    active++
+  }
+  selectDesign(designs[active])
+}
 </script>
 
 <style>
 #choose-design {
-  background-color: var(--white);
-  border-radius: 1rem;
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 1rem 1rem 0 0;
 }
 .designs {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-img {
+.design {
   box-sizing: border-box;
-  width: 15%;
-  min-width: 200px;
-  cursor: pointer;
+  width: 190px;
   padding: 1rem;
-  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
 }
-.active {
-  border: 3px solid var(--primary);
+.design-img {
+  width: 100%;
+  height: 100%;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  background-color: var(--white);
+}
+.btn {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.arrow {
+  padding: 0;
+  width: 20px;
+}
+.arrow-down {
+  transform: rotate(180deg);
+}
+.disabled {
+  background-color: var(--grey);
+  cursor: default;
 }
 h2 {
   margin-top: 0;

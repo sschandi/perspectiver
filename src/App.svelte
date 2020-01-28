@@ -1,90 +1,86 @@
 <div class="main">
-	<Header/>
-	<LayoutImages showLayout={showLayout} on:render="{handleRender}" on:back="{handleBack}"/>
-	<div style="display: {showRender ? 'block' : 'none'};">
+	<Welcome on:tutorial={() => showTutorial = true} />
+	{#if showTutorial}
+	<Tutorial on:done={() => showTutorial = false} />
+	{/if}
+	<div class="main__layout">
+		<LayoutImages on:render="{handleRender}">
+			<div class="header">
+				<div class="logo">P</div>
+				<h1 class="gradient-text">Perspectiver</h1>
+				<button class="btn btn-icon" on:click={() => showTutorial = true}>
+					<span class="gradient-text">?</span>
+				</button>
+			</div>
+			<p class="well">
+				Created by
+				<a href="https://github.com/sschandi/" target="_blank" class="link">SS Chandi</a>
+			</p>
+		</LayoutImages>
+	</div>
+	<div class="main__render">
 		<RenderCanvas images={images}/>
 	</div>
 </div>
 
 <script>
-	import Header from './Header.svelte'
-	import LayoutImages from './LayoutImages.svelte'
-	import RenderCanvas from './RenderCanvas.svelte'
-	import { slide } from 'svelte/transition'
+import { slide } from 'svelte/transition'
+import LayoutImages from './LayoutImages.svelte'
+import RenderCanvas from './RenderCanvas.svelte'
+import Tutorial from './Tutorial.svelte'
+import Welcome from './Welcome.svelte'
 
-	let images = []
-	let showLayout = true
-	let showRender = false
+let images = []
+let showTutorial = false
 
-	function handleRender(event) {
-		images = event.detail
-		showRender = true
-		showLayout = false
-	}
-
-	function handleBack() {
-		showRender = false
-		showLayout = true
-	}
+function handleRender(event) {
+	images = event.detail
+}
 </script>
 
 <style>
-:global(:root) {
-	--primary: #7D47F0;
-	--secondary: #0FD3C8;
-	--grey: #dae1ef;
-	--font: #7286B3;
-	--font-header: #262939;
-	--white: #ffffff;
-}
-:global(body) {
-	background-color: var(--grey);
-	color: var(--font);
-	font-family: 'Didact Gothic', sans-serif;
-	margin: 0;
-	padding: 0;
-	min-width: 768px;
-	overflow-y: scroll;
-}
-:global(h1, h2, h3, h4) {
-	color: var(--font-header);
-}
-:global(p) {
-	margin: 0;
-}
-:global(input) {
-	width: 100px;
-	height: 32px;
-	border-radius: 50px;
-	border: 1px solid var(--grey);
-	padding: 0.5rem;
-	margin: 0;
-}
-:global(input:focus) {
-	outline: none;
-}
-:global(label) {
-	margin-bottom: 0.5rem;
-}
-:global(.btn) {
-	border: none;
-	background-color: var(--secondary);
-	color: var(--white);
-	border-radius: 50px;
-	padding: 0.5rem 1rem;
-	margin: 0.5rem 1rem;
-	cursor: pointer;
-	transition: all 500ms ease-in;
-}
-:global(.link) {
-	color: var(--font-header);
-	cursor: pointer;
-}
-:global(.link:hover) {
-	color: var(--font-header);
-	text-decoration: underline;
-}
 .main {
-	padding: 0 4rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+.main__layout {
+	width: 100%;
+}
+.main__render {
+	width: 100%;
+}
+@media (min-width: 900px) {
+	.main__layout {
+		width: 50%;
+		height: 100vh;
+	}
+	.main__render {
+		width: 50%;
+		height: 100vh;
+	}
+}
+.header {
+	display: flex;
+	align-items: center;
+}
+.header h1 {
+	margin-right: 0.5rem;
+}
+.well {
+	font-size: 16px;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  border-radius: 0.25rem;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--white);
+	box-shadow: var(--shadow);
+	margin-right: 1rem;
 }
 </style>
