@@ -1,6 +1,6 @@
 <div id="choose-design">
   <div class="designs">
-    <button class="btn btn-gradient" class:disabled="{active <= 0}" on:click={previousDesign}>
+    <button class="btn btn-icon"  on:click={previousDesign}>
       <img src="assets/arrow-up.svg" alt="Previous" class="arrow">
     </button>
     <div class="design">
@@ -10,7 +10,7 @@
         alt="Design Preview"
       >
     </div>
-    <button class="btn btn-gradient" class:disabled={active >= designs.length - 1} on:click={nextDesign}>
+    <button class="btn btn-icon" on:click={nextDesign}>
       <img src="assets/arrow-up.svg" alt="Previous" class="arrow arrow-down">
     </button>
   </div>
@@ -92,6 +92,8 @@ function selectDesign(design) {
 function previousDesign() {
   if (active > 0) {
     active--
+  } else {
+    active = designs.length - 1
   }
   selectDesign(designs[active])
 }
@@ -99,6 +101,8 @@ function previousDesign() {
 function nextDesign() {
   if (active < designs.length - 1) {
     active++
+  } else {
+    active = 0
   }
   selectDesign(designs[active])
 }
@@ -129,12 +133,6 @@ function nextDesign() {
   border-radius: 0.25rem;
   background-color: var(--white);
 }
-.btn {
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  margin: 0;
-}
 .arrow {
   padding: 0;
   width: 20px;
@@ -145,8 +143,5 @@ function nextDesign() {
 .disabled {
   background-color: var(--grey);
   cursor: default;
-}
-h2 {
-  margin-top: 0;
 }
 </style>

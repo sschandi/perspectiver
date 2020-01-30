@@ -73,12 +73,15 @@ label {
 	cursor: default;
 }
 .link {
-	color: var(--primary);
+	color: var(--secondary);
+	background: linear-gradient(90deg, var(--primary), var(--secondary));
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 	cursor: pointer;
 	text-decoration: none;
 }
 .link:hover {
-	color: var(--primary);
 	text-decoration: underline;
 }
 
