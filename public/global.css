@@ -1,15 +1,26 @@
 :root {
 	--primary: #1758f1;
 	--secondary: #37dbe0;
+	/* Light Theme */
 	--font: #4b5062;
-	--white: #ffffff;
 	--base: #ffffff;
+	--transparent-base: rgba(255, 255, 255, 0.5);
 	--body-bg: #f2f3fd;
 	--body-bg-gradient: linear-gradient(45deg, #f8fafe, #f2f3fd);
 	--inset-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
 	--shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
 	--input-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.8), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
 	--btn-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.8), inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(255, 255, 255, 0.1);
+	/* Dark Theme (toggled in ThemeToggle) */
+	/* --font: #ffffff;
+	--base: #333333;
+	--transparent-base: rgba(51, 51, 51, 0.5);
+	--body-bg: #212121;
+	--body-bg-gradient: linear-gradient(45deg, #282828, #212121);
+	--inset-shadow: inset 3px 3px 6px #171717, inset -3px -3px 8px #333333;
+	--shadow: 3px 3px 6px #171717, -3px -3px 6px #333333;
+	--input-shadow: inset 2px 2px 3px #171717, inset -3px -3px 6px #333333, inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(31, 31, 31, 0.1);
+	--btn-shadow: 2px 2px 3px #171717, -3px -3px 6px #333333, inset -60px 0px 30px -30px rgba(0, 0, 0, 0.01), inset 60px 0px 30px -30px rgba(31, 31, 31, 0.1); */
 }
 body {
 	background-image: var(--body-bg-gradient);
@@ -51,7 +62,6 @@ label {
   border: none;
   box-shadow: var(--btn-shadow);
   cursor: pointer;
-	transition: all 500ms ease-in;
 }
 .btn-sm {
 	padding: 5px 10px;

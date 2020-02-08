@@ -240,11 +240,11 @@ function getImages() {
 function addGrid() {
   for (var i = 0; i < (canvasWidth / grid); i++) {
     canvas.add(new fabric.Line([i * grid, 0, i * grid, canvasWidth], {
-      stroke: '#f2eff8',
+      stroke: 'rgba(51,51,51,0.2)',
       selectable: false
     }))
     canvas.add(new fabric.Line([0, i * grid, canvasWidth, i * grid], {
-      stroke: '#f2eff8',
+      stroke: 'rgba(51,51,51,0.2)',
       selectable: false
     }))
   }

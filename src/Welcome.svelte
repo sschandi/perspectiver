@@ -44,7 +44,7 @@ function tutorial() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--transparent-base);
 }
 .welcome {
   max-width: 500px;

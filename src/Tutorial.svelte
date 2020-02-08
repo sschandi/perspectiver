@@ -119,7 +119,7 @@ function go(number) {
 .tutorial-content-container {
   padding: 1rem;
   border-radius: 0.25rem;
-  background-color: #eff1f9;
+  background-color: var(--body-bg);
   box-shadow: var(--shadow);
 }
 .tutorial-content {
@@ -127,7 +127,7 @@ function go(number) {
   padding: 1rem;
   border-radius: 0.25rem;
   text-align: center;
-  background-color: #eff1f9;
+  background-color: var(--body-bg);
   box-shadow: var(--inset-shadow);
 }
 .tutorial-actions {
