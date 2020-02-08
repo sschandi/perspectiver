@@ -280,10 +280,10 @@ function deleteSelectedImage() {
 #layout-container {
   position: relative;
   flex: 1;
-  background-color: #eff1f9;
+  background-color: var(--body-bg);
+  background: var(--body-bg-gradient);
   border-radius: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: var(--inset-shadow);
   margin: 0 0 1rem 1rem;
   overflow: hidden;
   transition: height 400ms ease-in-out;

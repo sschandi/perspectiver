@@ -124,14 +124,14 @@ function nextDesign() {
   padding: 1rem;
   margin: 0.5rem 0;
   border-radius: 0.25rem;
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: var(--inset-shadow);
 }
 .design-img {
   width: 100%;
   height: 100%;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow);
   border-radius: 0.25rem;
-  background-color: var(--white);
+  background-color: var(--base);
 }
 .arrow {
   padding: 0;
@@ -139,9 +139,5 @@ function nextDesign() {
 }
 .arrow-down {
   transform: rotate(180deg);
-}
-.disabled {
-  background-color: var(--grey);
-  cursor: default;
 }
 </style>

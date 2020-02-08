@@ -16,6 +16,7 @@
 				Created by
 				<a href="https://github.com/sschandi/" target="_blank" class="link">SS Chandi</a>
 			</p>
+			<ThemeToggle />
 		</LayoutImages>
 	</div>
 	<div class="main__render">
@@ -27,6 +28,7 @@
 import { slide } from 'svelte/transition'
 import LayoutImages from './LayoutImages.svelte'
 import RenderCanvas from './RenderCanvas.svelte'
+import ThemeToggle from './ThemeToggle.svelte'
 import Tutorial from './Tutorial.svelte'
 import Welcome from './Welcome.svelte'
 
@@ -79,7 +81,7 @@ function handleRender(event) {
   border-radius: 0.25rem;
   font-size: 36px;
   font-weight: bold;
-  color: var(--white);
+  color: var(--base);
 	box-shadow: var(--shadow);
 	margin-right: 1rem;
 }

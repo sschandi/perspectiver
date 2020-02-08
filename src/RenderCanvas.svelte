@@ -374,8 +374,8 @@ function trackTransforms(ctx) {
 .canvas-bg {
   margin: 0 1rem 1rem 1rem;
   border-radius: 0.25rem;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
-  background-color: var(--white);
+  box-shadow: var(--shadow);
+  background-color: var(--base);
 }
 #render-canvas {
   z-index: 2;
@@ -406,10 +406,6 @@ function trackTransforms(ctx) {
 }
 .canvas-padding {
   flex-grow: 1;
-}
-.info {
-  text-align: center;
-  padding: 0.5rem;
 }
 .ui-controls {
   padding: 1rem 1rem 1rem 0;

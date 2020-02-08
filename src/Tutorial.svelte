@@ -111,16 +111,16 @@ function go(number) {
   align-items: center;
   font-size: 24px;
   font-weight: bold;
-  color: var(--white);
+  color: var(--base);
   background: linear-gradient(45deg, #fd6b58, #f2e75a);
   border-radius: 30px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow);
 }
 .tutorial-content-container {
   padding: 1rem;
   border-radius: 0.25rem;
   background-color: #eff1f9;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow);
 }
 .tutorial-content {
   max-width: 200px;
@@ -128,7 +128,7 @@ function go(number) {
   border-radius: 0.25rem;
   text-align: center;
   background-color: #eff1f9;
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: var(--inset-shadow);
 }
 .tutorial-actions {
   display: flex;

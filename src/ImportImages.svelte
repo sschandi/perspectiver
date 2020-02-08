@@ -74,6 +74,6 @@ function upload(data) {
   height: 0;
 }
 .active {
-  background-color: azure;
+  background-color: var(--base);
 }
 </style>
