@@ -5,7 +5,7 @@
 </div>
 
 <script>
-let darkMode = localStorage.getItem('darkMode') || false
+let darkMode = JSON.parse(localStorage.getItem('darkMode')) || false
 
 const light = {
   '--font': '#4b5062',
