@@ -204,21 +204,6 @@ function importImage(event) {
   addImageFromURL(event.detail)
 }
 
-// function toDataURL(src) {
-//   var img = new Image();
-//   img.crossOrigin = 'Anonymous';
-//   img.onload = function() {
-//     var canvas = document.createElement('CANVAS');
-//     var ctx = canvas.getContext('2d');
-//     var dataURL;
-//     canvas.height = this.naturalHeight;
-//     canvas.width = this.naturalWidth;
-//     ctx.drawImage(this, 0, 0);
-//     dataURL = canvas.toDataURL()
-//   };
-//   img.src = src;
-// }
-
 function getImages() {
   const images = canvas.getObjects('image')
   const result = []

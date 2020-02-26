@@ -394,7 +394,6 @@ function trackTransforms(ctx) {
   width: calc(100% - 200px);
   display: flex;
   flex-direction: column;
-  /* background: linear-gradient(45deg, var(--primary), var(--secondary)); */
 }
 .render-controls {
   width: 200px;
